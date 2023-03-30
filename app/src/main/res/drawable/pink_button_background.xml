@@ -1,0 +1,9 @@
+<!-- pink_button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="16dp" />
+    <gradient
+        android:startColor="#FFA07A"
+        android:endColor="#FF1493"
+        android:angle="135"/>
+</shape>

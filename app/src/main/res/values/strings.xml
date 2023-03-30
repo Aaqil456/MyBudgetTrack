@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MyBudgetTrack</string>
+    <!-- Logo description -->
+    <string name="logo_description">App Logo</string>
+
+    <!-- Username hint -->
+    <string name="username_hint">Enter your username</string>
+
+    <!-- Password hint -->
+    <string name="password_hint">Enter your password</string>
+
+    <!-- Login button label -->
+    <string name="login_button_label">Login</string>
+    <string name="logout_button_label">logout</string>
+
 </resources>

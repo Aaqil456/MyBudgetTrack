@@ -1,0 +1,8 @@
+<!-- pink_gradient_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:startColor="#FFEDE5"
+        android:endColor="#FFEDE5"
+        android:angle="135"/>
+</shape>
