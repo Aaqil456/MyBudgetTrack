@@ -15,5 +15,11 @@
     <!-- Login button label -->
     <string name="login_button_label">Login</string>
     <string name="daftar_button_label">Daftar</string>
+    <string name="welcome_message">Welcome</string>
+
+    <string name="buttonAkaun_description" />
+    <string name="buttonBajet_description" />
+    <string name="buttonBil_description" />
+    <string name="buttonGraf_description" />
 
 </resources>

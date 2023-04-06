@@ -7,6 +7,74 @@
     android:background="@drawable/pink_gradient_background"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/welcome_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome, User!"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <GridLayout
+            android:id="@+id/menu_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/welcome_message"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:paddingTop="16dp">
+
+            <ImageButton
+                android:id="@+id/buttonAkaun"
+                android:background="@drawable/pink_gradient_background"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:src="@drawable/bar"
+                android:contentDescription="@string/buttonAkaun_description" />
+
+            <ImageButton
+                android:id="@+id/buttonBajet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:background="@drawable/pink_gradient_background"
+                android:contentDescription="@string/buttonBajet_description"
+                android:src="@drawable/bar" />
+
+            <ImageButton
+                android:id="@+id/buttonBil"
+                android:background="@drawable/pink_gradient_background"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:src="@drawable/bar"
+                android:contentDescription="@string/buttonBil_description" />
+
+            <ImageButton
+                android:id="@+id/buttonGraf"
+                android:background="@drawable/pink_gradient_background"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:src="@drawable/bar"
+                android:contentDescription="@string/buttonGraf_description" />
+
+        </GridLayout>
+
+    </RelativeLayout>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

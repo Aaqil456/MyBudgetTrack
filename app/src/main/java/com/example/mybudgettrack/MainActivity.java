@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -17,20 +18,56 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
+
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     private FirebaseAuth mAuth;
+    ImageButton btnAkaun,btnBajet,btnBil,btnGraf;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         mAuth = FirebaseAuth.getInstance();
 
+        btnAkaun=findViewById(R.id.buttonAkaun);
+        btnBajet=findViewById(R.id.buttonBajet);
+        btnBil=findViewById(R.id.buttonBil);
+        btnGraf=findViewById(R.id.buttonGraf);
+
+        btnAkaun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Akaun.class));
+            }
+        });
+        //could not do intent for button bajet
+        btnBajet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Bajet.class));
+            }
+        });
+
+        btnBil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Bil.class));
+            }
+        });
+
+        btnGraf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, TunjukGraf.class));
+            }
+        });
 
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
