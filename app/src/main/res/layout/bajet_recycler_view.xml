@@ -1,0 +1,46 @@
+<!-- item_layout.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    app:cardCornerRadius="26dp"
+    android:backgroundTint="@color/login_button"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/nama_bajet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/jumlah_bajet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="saya"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/tempoh_bajet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="black"
+            android:textSize="22sp"
+            android:textColor="@android:color/black"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
