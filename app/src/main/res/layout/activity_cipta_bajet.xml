@@ -21,19 +21,22 @@
             android:id="@+id/nama_bajet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Isi Nama Bajet" />
+            android:hint="Isi Nama Bajet"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/jumlah_bajet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Isi Jumlah Bajet" />
+            android:hint="Isi Jumlah Bajet"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/tempoh_bajet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Isi Tempoh Bajet" />
+            android:hint="Isi Tempoh Bajet"
+            android:minHeight="48dp" />
 
         <Button
             android:id="@+id/submit_button"

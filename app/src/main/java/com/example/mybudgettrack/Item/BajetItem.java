@@ -5,6 +5,8 @@ public class BajetItem {
     private String jumlahBajet;
     private String tempohBajet;
 
+    public BajetItem() {
+    }
 
     public BajetItem(String namaBajet, String jumlahBajet, String tempohBajet) {
         this.namaBajet = namaBajet;
