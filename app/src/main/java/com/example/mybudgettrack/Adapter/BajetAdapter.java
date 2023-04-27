@@ -12,51 +12,54 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mybudgettrack.Item.BajetItem;
 import com.example.mybudgettrack.R;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.List;
 
-public class BajetAdapter extends RecyclerView.Adapter<BajetAdapter.ItemViewHolder> {
-    private static List<BajetItem> items;
+public class BajetAdapter extends RecyclerView.Adapter<BajetAdapter.ViewHolder> {
 
+    private List<BajetItem> mData;
 
-    public BajetAdapter(List<BajetItem> items) {
-        this.items = items;
-    }
-
-    @NonNull
-    @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.bajet_recycler_view, parent, false);
-        return new ItemViewHolder(view);
+    public BajetAdapter(List<BajetItem> data) {
+        mData = data;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        BajetItem item = items.get(position);
-        holder.namaTextView.setText(item.getNamaBajet());
-        holder.jumlahTextView.setText(item.getJumlahBajet());
-        holder.tempohTextView.setText(item.getTempohBajet());
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bajet_recycler_view, parent, false);
+        return new ViewHolder(view);
+    }
+
+
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        BajetItem model = mData.get(position);
+        holder.namaBajet.setText(model.getNamaBajet());
+        holder.jumlahBajet.setText(model.getJumlahBajet());
+        holder.tempohBajet.setText(model.getTempohBajet());
 
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return mData.size();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder  {
-        public TextView namaTextView;
-        public TextView jumlahTextView;
-        public TextView tempohTextView;
 
-        public ItemViewHolder(View itemView) {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView namaBajet;
+        TextView jumlahBajet;
+        TextView tempohBajet;
+
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            namaTextView = itemView.findViewById(R.id.nama_bajet);
-            jumlahTextView = itemView.findViewById(R.id.jumlah_bajet);
-            tempohTextView= itemView.findViewById(R.id.tempoh_bajet);
+            namaBajet = itemView.findViewById(R.id.nama_bajet);
+            jumlahBajet = itemView.findViewById(R.id.jumlah_bajet);
+            tempohBajet = itemView.findViewById(R.id.tempoh_bajet);
+
         }
-
-
     }
 }

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.mybudgettrack.Adapter.BajetAdapter;
 import com.example.mybudgettrack.Item.BajetItem;
@@ -20,6 +21,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
@@ -27,13 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bajet extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private BajetAdapter adapter;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference itemRef = db.collection("bajets");
-    private ArrayList<BajetItem> mExampleList;
-    List<BajetItem> items = new ArrayList<>();
-
+    private RecyclerView mRecyclerView;
+    private BajetAdapter mAdapter;
+    private List<BajetItem> mData;
     Button btnAdd;
 
     @Override
@@ -42,41 +41,33 @@ public class Bajet extends AppCompatActivity {
         setContentView(R.layout.activity_bajet);
 
         btnAdd=findViewById(R.id.add_button);
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        /*
-        items.add(new BajetItem("Bajet 1", "2000","2 bulan"));
-        items.add(new BajetItem("Bajet 2", "12334","3 hari"));
-        items.add(new BajetItem("Bajet 3", "12332","4 tahun"));
-        */
-        adapter = new BajetAdapter(items);
-        recyclerView.setAdapter(adapter);
+        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        mData = new ArrayList<>();
+        mAdapter = new BajetAdapter(mData);
+        mRecyclerView.setAdapter(mAdapter);
 
-        itemRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.w(TAG, "Listen failed.", error);
-                    return;
-                }
-
-                items.clear();
-                for (DocumentSnapshot document : value) {
-                    BajetItem bajetItem = document.toObject(BajetItem.class);
-                    items.add(bajetItem);
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-
+        FirebaseFirestore.getInstance().collection("bajets")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        BajetItem model = document.toObject(BajetItem.class);
+                        mData.add(model);
+                    }
+                    mAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(Bajet.this, "Error retrieving data", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Error retrieving data", e);
+                });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Bajet.this,CiptaBajet.class));
-            }
-        });
+                startActivity(new Intent(Bajet.this, CiptaBajet.class));
+               }
+            });
+
     }
 }
