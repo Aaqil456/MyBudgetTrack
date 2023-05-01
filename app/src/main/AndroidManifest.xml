@@ -14,9 +14,6 @@
         android:theme="@style/Theme.MyBudgetTrack"
         tools:targetApi="31">
         <activity
-            android:name=".CiptaBajet"
-            android:exported="false" />
-        <activity
             android:name=".Bajet"
             android:exported="false" />
         <activity
