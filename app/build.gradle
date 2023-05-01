@@ -36,6 +36,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.6'
     implementation 'com.google.firebase:firebase-auth:21.0.8'
 
+    implementation fileTree(dir: 'libs',include: ['*.jar'])
+
+
+
+
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
 
 
     implementation 'com.google.firebase:firebase-firestore:23.0.3'

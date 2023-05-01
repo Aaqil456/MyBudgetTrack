@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ import java.util.UUID;
 public class Bajet extends AppCompatActivity {
 
     EditText etWang, etTarikh, etPenerangan;
-    Button btnSimpan;
+    Button btnSimpan,mListButton;
     ProgressDialog pd;
     FirebaseFirestore db;
 
@@ -39,6 +40,7 @@ public class Bajet extends AppCompatActivity {
         etTarikh=findViewById(R.id.etTarikh);
         etPenerangan=findViewById(R.id.etPenerangan);
         btnSimpan=findViewById(R.id.saveBtn);
+        mListButton=findViewById(R.id.listBtn);
 
         //progress dialog
         pd = new ProgressDialog(this);
@@ -54,6 +56,15 @@ public class Bajet extends AppCompatActivity {
                 String penerangan = etPenerangan.getText().toString().trim();
 
                 uploadData(wang,tarikh,penerangan);
+            }
+        });
+
+        //click button to show list
+        mListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Bajet.this,BajetListActivity.class));
+                finish();
             }
         });
 
