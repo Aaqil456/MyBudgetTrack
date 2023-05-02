@@ -40,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
         btnAkaun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Bajet.class));
+                startActivity(new Intent(MainActivity.this, BajetListActivity.class));
             }
         });
         //could not do intent for button bajet
         btnBajet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Bajet.class));
+                startActivity(new Intent(MainActivity.this, BajetListActivity.class));
             }
         });
 

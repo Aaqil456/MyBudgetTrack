@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="twitter_blue">#1DA1F2</color>
     <color name="login_button">#C58BF2</color>
+    <color name="fab_background_color">#2196F3</color>
+    <color name="fab_ripple_color">#FFFFFF</color>
+    <color name="fab_icon_color">#FFFFFF</color>
+
 
 </resources>

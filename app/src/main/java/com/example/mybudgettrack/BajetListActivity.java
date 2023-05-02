@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.mybudgettrack.Adapter.BajetAdapter;
@@ -14,6 +16,7 @@ import com.example.mybudgettrack.Model.BajetModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -33,6 +36,7 @@ public class BajetListActivity extends AppCompatActivity {
     FirebaseFirestore db;
     BajetAdapter adapter;
     ProgressDialog pd;
+    FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +46,18 @@ public class BajetListActivity extends AppCompatActivity {
 
         //initialize view
         mRecyclerView=findViewById(R.id.recycler_view);
-
+        floatingActionButton=findViewById(R.id.fab_button);
         //set recycler view properties
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BajetListActivity.this,Bajet.class));
+            }
+        });
 
         pd = new ProgressDialog(this);
         //show data in recycler view
