@@ -28,6 +28,8 @@ public class Bajet extends AppCompatActivity {
     ProgressDialog pd;
     FirebaseFirestore db;
 
+    String pId,pWang,pTarikh,pPenerangan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +41,37 @@ public class Bajet extends AppCompatActivity {
         etWang=findViewById(R.id.etWang);
         etTarikh=findViewById(R.id.etTarikh);
         etPenerangan=findViewById(R.id.etPenerangan);
+
         btnSimpan=findViewById(R.id.saveBtn);
         mListButton=findViewById(R.id.listBtn);
+
+        /*if come here after clicking update in alert dialog of BajetListactivity
+        * then get data id, wang, tarikh, penerangan
+        * change title of action bar and add save button*/
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null){
+            //Update Data
+            actionBar.setTitle("Update Data");
+            btnSimpan.setText("Kemaskini");
+
+            //get data
+            pId= bundle.getString("pid");
+            pWang= bundle.getString("pwang");
+            pTarikh= bundle.getString("ptarikh");
+            pPenerangan= bundle.getString("ppenerangan");
+
+            //set data
+            etWang.setText(pWang);
+            etTarikh.setText(pTarikh);
+            etPenerangan.setText(pPenerangan);
+
+        }
+        else{
+            //new data
+            actionBar.setTitle("Add Data");
+            btnSimpan.setText("Simpan");
+        }
+
 
         //progress dialog
         pd = new ProgressDialog(this);
@@ -51,11 +82,29 @@ public class Bajet extends AppCompatActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String wang = etWang.getText().toString().trim();
-                String tarikh = etTarikh.getText().toString().trim();
-                String penerangan = etPenerangan.getText().toString().trim();
+                Bundle bundle1 = getIntent().getExtras();
+                if(bundle !=null){
+                    //updating
+                    //input data
+                    String id= pId;
+                    String wang = etWang.getText().toString().trim();
+                    String tarikh = etTarikh.getText().toString().trim();
+                    String penerangan = etPenerangan.getText().toString().trim();
+                    //call update data function
+                    updateData(id,wang,tarikh,penerangan);
+                }
+                else{
+                    //adding new
+                    //input data
+                    String wang = etWang.getText().toString().trim();
+                    String tarikh = etTarikh.getText().toString().trim();
+                    String penerangan = etPenerangan.getText().toString().trim();
+                    //call upload data function
+                    uploadData(wang,tarikh,penerangan);
+                }
 
-                uploadData(wang,tarikh,penerangan);
+
+
             }
         });
 
@@ -69,6 +118,28 @@ public class Bajet extends AppCompatActivity {
         });
 
 
+    }
+
+    private void updateData(String id, String wang, String tarikh, String penerangan) {
+        pd.setTitle("Kemaskini data");
+        pd.show();
+
+        db.collection("bajet1").document(id)
+                .update("Wang perbelanjaan",wang
+                        , "Tarikh perbelanjaan",tarikh
+                ,"Penerangan perbelanjaan",penerangan).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        pd.dismiss();
+                        Toast.makeText(Bajet.this,"Telah dikemaskini",Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pd.dismiss();
+                        Toast.makeText(Bajet.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void uploadData(String wang, String tarikh, String penerangan) {

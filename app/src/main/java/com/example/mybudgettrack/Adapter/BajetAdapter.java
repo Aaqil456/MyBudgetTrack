@@ -1,6 +1,9 @@
 package com.example.mybudgettrack.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mybudgettrack.Bajet;
 import com.example.mybudgettrack.BajetListActivity;
 import com.example.mybudgettrack.Model.BajetModel;
 import com.example.mybudgettrack.R;
@@ -52,7 +56,37 @@ public class BajetAdapter extends RecyclerView.Adapter<BajetViewHolder> {
 
             @Override
             public void onItemLongClick(View view, int position) {
+            //creating alert dialog
+                AlertDialog.Builder builder= new AlertDialog.Builder(listActivity);
+                //options to display in dialog
+                String[] options = {"Update","Delete"};
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(i == 0){
+                            //update is clicked
+                            String id = modelList.get(position).getId();
+                            String wang = modelList.get(position).getWangBajet();
+                            String tarikh = modelList.get(position).getTarikhBajet();
+                            String penerangan = modelList.get(position).getPeneranganBajet();
 
+                            //intent to start activity
+                            Intent intent = new Intent(listActivity, Bajet.class);
+                            //put data in intent
+                            intent.putExtra("pid",id);
+                            intent.putExtra("pwang",wang);
+                            intent.putExtra("ptarikh",tarikh);
+                            intent.putExtra("ppenerangan",penerangan);
+
+                            listActivity.startActivity(intent);
+
+                        }
+
+                        if(i == 1){
+                            //delete is clicked
+                        }
+                    }
+                }).create().show();
             }
         });
 

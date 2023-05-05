@@ -1,6 +1,7 @@
 package com.example.mybudgettrack;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,8 @@ public class BajetListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bajet_list);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("List Data");
         //init firestore
         db = FirebaseFirestore.getInstance();
 
