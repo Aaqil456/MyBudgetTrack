@@ -2,6 +2,7 @@ package com.example.mybudgettrack.ViewHolder;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,6 +43,7 @@ public class BajetViewHolder extends RecyclerView.ViewHolder {
     }
 
     private BajetViewHolder.ClickListener mClickListener;
+
     //interface for click listener
     public  interface  ClickListener{
         void onItemClick(View view, int position);

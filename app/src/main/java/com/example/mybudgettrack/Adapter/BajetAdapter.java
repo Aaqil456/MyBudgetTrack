@@ -42,8 +42,8 @@ public class BajetAdapter extends RecyclerView.Adapter<BajetViewHolder> {
 
         BajetViewHolder bajetViewHolder = new BajetViewHolder(itemView);
 
-        //handle item click here
 
+        //handle item click here
         bajetViewHolder.setOnClickListener(new BajetViewHolder.ClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -90,7 +90,7 @@ public class BajetAdapter extends RecyclerView.Adapter<BajetViewHolder> {
             }
         });
 
-        return new BajetViewHolder(itemView);
+        return bajetViewHolder;
     }
 
     @Override
