@@ -77,6 +77,7 @@ public class BajetListActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    modelList.clear();
                     pd.dismiss();
                     for(DocumentSnapshot doc: task.getResult()){
                         BajetModel model = new BajetModel(doc.getString("id")
@@ -95,6 +96,28 @@ public class BajetListActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                     pd.dismiss();
+                        Toast.makeText(BajetListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void deleteData(int index){
+        //set title of progress dialog
+        pd.setTitle("Deleting data....");
+        pd.show();
+        db.collection("bajet1").document(modelList.get(index).getId())
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(BajetListActivity.this, "Deleted ...", Toast.LENGTH_SHORT).show();
+                        showData();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pd.dismiss();
                         Toast.makeText(BajetListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

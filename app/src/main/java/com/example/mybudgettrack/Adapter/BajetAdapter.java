@@ -84,6 +84,7 @@ public class BajetAdapter extends RecyclerView.Adapter<BajetViewHolder> {
 
                         if(i == 1){
                             //delete is clicked
+                            listActivity.deleteData(position);
                         }
                     }
                 }).create().show();
