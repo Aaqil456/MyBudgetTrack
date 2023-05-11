@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout_budget"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pink_gradient_background"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textview_budget_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Set Your Budget"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edittext_budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_budget_title"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/edittext_rounded_border"
+        android:hint="Enter your budget"
+        android:inputType="numberDecimal"
+        android:textColorHint="#808080"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup_duration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_budget"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/radiobutton_week">
+
+        <RadioButton
+            android:id="@+id/radiobutton_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Week"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/radiobutton_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Month"
+            android:textSize="24sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button_calculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radiogroup_duration"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_rounded_bg"
+        android:text="Calculate"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textview_daily_expenditure_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_calculate"
+        android:layout_marginTop="48dp"
+        android:text="Daily Expenditure"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/result_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_daily_expenditure_title"
+        android:layout_marginTop="16dp"
+        android:textColor="#808080"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/drawable/button_background.xml" value="0.1625" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/drawable/button_rounded_bg.xml" value="0.143" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/drawable/edittext_background.xml" value="0.1625" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/drawable/edittext_rounded_border.xml" value="0.143" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/drawable/ic_baseline_preview_24.xml" value="0.1625" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/drawable/pink_button_background.xml" value="0.1625" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/drawable/pink_gradient_background.xml" value="0.1625" />
@@ -19,6 +21,7 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/activity_login.xml" value="0.21" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/activity_register_user.xml" value="0.22" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/activity_set_bajet.xml" value="0.21" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/bajet_model_layout.xml" value="0.18" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/bajet_recycler_view.xml" value="0.22" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/menu/main_menu.xml" value="0.1675929884566054" />

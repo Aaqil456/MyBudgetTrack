@@ -126,7 +126,7 @@ public class Bajet extends AppCompatActivity {
 
         db.collection("bajet1").document(id)
                 .update("Wang perbelanjaan",wang
-                        , "Tarikh perbelanjaan",tarikh
+                        , "Tarikh perbelanjaan",tarikh.toLowerCase()
                 ,"Penerangan perbelanjaan",penerangan).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -30,7 +30,7 @@
             android:paddingTop="16dp">
 
             <ImageButton
-                android:id="@+id/buttonAkaun"
+                android:id="@+id/buttonSetBajet"
                 android:background="@drawable/pink_gradient_background"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     private FirebaseAuth mAuth;
-    ImageButton btnAkaun,btnBajet,btnBil,btnGraf;
+    ImageButton btnSetBajet,btnBajet,btnBil,btnGraf;
 
 
 
@@ -32,15 +32,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
 
-        btnAkaun=findViewById(R.id.buttonAkaun);
+        btnSetBajet=findViewById(R.id.buttonSetBajet);
         btnBajet=findViewById(R.id.buttonBajet);
         btnBil=findViewById(R.id.buttonBil);
         btnGraf=findViewById(R.id.buttonGraf);
 
-        btnAkaun.setOnClickListener(new View.OnClickListener() {
+        btnSetBajet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, BajetListActivity.class));
+                startActivity(new Intent(MainActivity.this, SetBajet.class));
             }
         });
         //could not do intent for button bajet
