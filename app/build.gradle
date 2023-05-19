@@ -3,6 +3,7 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+
 android {
     compileSdk 32
 
@@ -42,7 +43,6 @@ dependencies {
 
 
 
-
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
 
@@ -54,6 +54,8 @@ dependencies {
     //floating button
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'com.google.android.gms:play-services-tflite-acceleration-service:+'
+
+
 
 
     testImplementation 'junit:junit:4.13.2'

@@ -1,29 +1,35 @@
 package com.example.mybudgettrack;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
 public class Bajet extends AppCompatActivity {
 
-    EditText etWang, etTarikh, etPenerangan;
+    EditText etWang,  etPenerangan;
+    TextView etTarikh;
     Button btnSimpan,mListButton;
     ProgressDialog pd;
     FirebaseFirestore db;
@@ -44,6 +50,7 @@ public class Bajet extends AppCompatActivity {
 
         btnSimpan=findViewById(R.id.saveBtn);
         mListButton=findViewById(R.id.listBtn);
+
 
         /*if come here after clicking update in alert dialog of BajetListactivity
         * then get data id, wang, tarikh, penerangan
@@ -118,6 +125,29 @@ public class Bajet extends AppCompatActivity {
         });
 
 
+
+
+    }
+
+
+    //date picker function
+    private DatePickerDialog.OnDateSetListener dateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    // monthOfYear is 0-indexed, so add 1 to get the correct month
+                    String formattedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
+                    etTarikh.setText(formattedDate);
+                }
+            };
+
+
+    public void showDatePickerDialog(View view) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, dateSetListener,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
     }
 
     private void updateData(String id, String wang, String tarikh, String penerangan) {

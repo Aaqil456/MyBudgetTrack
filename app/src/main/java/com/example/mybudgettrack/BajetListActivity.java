@@ -1,37 +1,29 @@
 package com.example.mybudgettrack;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mybudgettrack.Adapter.BajetAdapter;
 import com.example.mybudgettrack.Model.BajetModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tflite.acceleration.Model;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Document;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class BajetListActivity extends AppCompatActivity {
 
@@ -60,6 +52,7 @@ public class BajetListActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +84,8 @@ public class BajetListActivity extends AppCompatActivity {
                                 ,doc.getString("Tarikh perbelanjaan")
                                 ,doc.getString("Penerangan perbelanjaan"));
                             modelList.add(model);
+
+
                          }
                     //adapter
                     adapter = new BajetAdapter(BajetListActivity.this,modelList);

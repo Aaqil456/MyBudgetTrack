@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pink_gradient_background"
     tools:context=".BajetListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_plus"
-        app:backgroundTint="@color/fab_background_color"
+        app:backgroundTint="@color/purple_200"
         app:elevation="6dp"
         app:maxImageSize="48dp"
         app:rippleColor="@color/fab_ripple_color"
