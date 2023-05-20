@@ -1,7 +1,10 @@
 package com.example.mybudgettrack;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -9,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BajetListActivity extends AppCompatActivity {
 
@@ -36,6 +43,10 @@ public class BajetListActivity extends AppCompatActivity {
     BajetAdapter adapter;
     ProgressDialog pd;
     FloatingActionButton floatingActionButton;
+
+    private static final String CHANNEL_ID = "OverspendingChannel";
+    // Notification ID
+    private static final int NOTIFICATION_ID = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,15 +89,43 @@ public class BajetListActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     modelList.clear();
                     pd.dismiss();
+
+                        // Map to store the total money spent for each date
+                        Map<String, Double> totalMoneySpentByDate = new HashMap<>();
+
                     for(DocumentSnapshot doc: task.getResult()){
-                        BajetModel model = new BajetModel(doc.getString("id")
+                        BajetModel model = new BajetModel(
+                                 doc.getString("id")
                                 ,doc.getString("Wang perbelanjaan")
                                 ,doc.getString("Tarikh perbelanjaan")
                                 ,doc.getString("Penerangan perbelanjaan"));
+                        // Get the date of spend
+                        String dateOfSpend = doc.getString("Tarikh perbelanjaan");
+
+                        // Calculate the total money spent for each date
+                        double moneySpent = Double.parseDouble(doc.getString("Wang perbelanjaan"));
+                        if (totalMoneySpentByDate.containsKey(dateOfSpend)) {
+                            double currentTotal = totalMoneySpentByDate.get(dateOfSpend);
+                            totalMoneySpentByDate.put(dateOfSpend, currentTotal + moneySpent);
+                        } else {
+                            totalMoneySpentByDate.put(dateOfSpend, moneySpent);
+                        }
+
                             modelList.add(model);
-
-
                          }
+
+                        // Calculate the total money spent for the same date and check for overspending
+                        for (BajetModel model : modelList) {
+                            String dateOfSpend = model.getTarikhBajet();
+                            if (totalMoneySpentByDate.containsKey(dateOfSpend)) {
+                                double totalMoneySpent = totalMoneySpentByDate.get(dateOfSpend);
+                                model.setTotalMoneySpent(totalMoneySpent);
+
+                                if (totalMoneySpent > 30) {
+                                    showOverspendingNotification(totalMoneySpent, dateOfSpend);
+                                }
+                            }
+                        }
                     //adapter
                     adapter = new BajetAdapter(BajetListActivity.this,modelList);
                     //set adapter to recycler view
@@ -100,6 +139,37 @@ public class BajetListActivity extends AppCompatActivity {
                         Toast.makeText(BajetListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void showOverspendingNotification(double totalMoneySpent, String dateOfSpend) {
+        String message = "You have overspent " + (totalMoneySpent - 30) + " on " + dateOfSpend;
+
+        // Create a notification channel (required for newer Android versions)
+        createNotificationChannel();
+
+        // Create the notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.notification_icon)
+                .setContentTitle("Overspending Alert")
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        // Show the notification
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Overspending Channel";
+            String description = "Channel for overspending notifications";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     public void deleteData(int index){

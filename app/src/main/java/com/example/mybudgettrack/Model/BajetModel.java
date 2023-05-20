@@ -2,7 +2,7 @@ package com.example.mybudgettrack.Model;
 
 public class BajetModel {
      String id, wangBajet, tarikhBajet, peneranganBajet;
-
+     double totalMoneySpent;
     public BajetModel() {
     }
 
@@ -11,6 +11,8 @@ public class BajetModel {
         this.wangBajet = wangBajet;
         this.tarikhBajet = tarikhBajet;
         this.peneranganBajet = peneranganBajet;
+        this.totalMoneySpent = 0; // Default value of totalMoneySpent
+
     }
 
     public String getId() {
@@ -43,5 +45,12 @@ public class BajetModel {
 
     public void setPeneranganBajet(String peneranganBajet) {
         this.peneranganBajet = peneranganBajet;
+    }
+    public double getTotalMoneySpent() {
+        return totalMoneySpent;
+    }
+
+    public void setTotalMoneySpent(double totalMoneySpent) {
+        this.totalMoneySpent = totalMoneySpent;
     }
 }
