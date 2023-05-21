@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,82 +8,151 @@
     tools:context=".MainActivity">
 
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/OuterLayer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="400dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/edittext_background"
+        android:elevation="8dp"
+        android:padding="16dp">
 
+        <RelativeLayout
+            android:id="@+id/btnSetBajet"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_background"
+            android:elevation="8dp"
+            android:padding="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- First Image Button -->
-            <ImageButton
-                android:id="@+id/buttonSetBajet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/imgSetBajet"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="2dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/money" />
 
             <TextView
-                android:id="@+id/textView1a"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
+                android:layout_below="@id/imgSetBajet"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
                 android:text="Set Bajet" />
 
+        </RelativeLayout>
 
-            <!-- Second Image Button -->
-            <ImageButton
-                android:id="@+id/buttonBajet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/btnBajet"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_background"
+            android:elevation="8dp"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/imgBajet"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="2dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/bajet" />
 
             <TextView
-                android:id="@+id/textView2a"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="Tambah Perbelanjaan" />
+                android:layout_below="@id/imgBajet"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="6dp"
+                android:text="Set Bajet" />
 
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/btnBil"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_background"
+            android:elevation="8dp"
+            android:padding="16dp">
 
-            <!-- Third Image Button -->
-            <ImageButton
-                android:id="@+id/buttonBil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/imgBil"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="2dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/bil" />
 
             <TextView
-                android:id="@+id/textView3a"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="Peringatan Bil" />
+                android:layout_below="@id/imgBil"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="6dp"
+                android:text="Set Bajet" />
 
-            <!-- Fourth Image Button -->
-            <ImageButton
-                android:id="@+id/buttonGraf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnGraf"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:background="@drawable/button_background"
+            android:elevation="18dp"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/imgGraf"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="2dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/bar" />
 
             <TextView
-                android:id="@+id/textView4a"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="Lihat Graf" />
+                android:layout_below="@id/imgGraf"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="6dp"
+                android:text="Graf" />
+
+        </RelativeLayout>
+    </RelativeLayout>
 
 
-
-        </LinearLayout>
-
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

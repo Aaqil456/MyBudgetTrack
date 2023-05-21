@@ -1,71 +1,47 @@
 package com.example.mybudgettrack;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-
 public class MainActivity extends AppCompatActivity {
-    Toolbar toolbar;
     private FirebaseAuth mAuth;
-    ImageButton btnSetBajet,btnBajet,btnBil,btnGraf;
-
-
-
+    RelativeLayout btnBajet,btnSetBajet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-
-        btnSetBajet=findViewById(R.id.buttonSetBajet);
-        btnBajet=findViewById(R.id.buttonBajet);
-        btnBil=findViewById(R.id.buttonBil);
-        btnGraf=findViewById(R.id.buttonGraf);
+        btnBajet = findViewById(R.id.btnBajet);
+        btnSetBajet=findViewById(R.id.btnSetBajet);
 
         btnSetBajet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SetBajet.class));
+                startActivity(new Intent(MainActivity.this,SetBajet.class));
             }
         });
-        //could not do intent for button bajet
+
         btnBajet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, BajetListActivity.class));
-            }
-        });
-
-        btnBil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Bil.class));
-            }
-        });
-
-        btnGraf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, TunjukGraf.class));
+                startActivity(new Intent(MainActivity.this,BajetListActivity.class));
             }
         });
 
     }
+
 
 
     @Override
@@ -88,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
         }
+
+
 
     @Override
     protected void onStart() {
