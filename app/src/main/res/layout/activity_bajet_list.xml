@@ -7,6 +7,7 @@
     android:background="@drawable/pink_gradient_background"
     tools:context=".BajetListActivity">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

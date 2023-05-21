@@ -3,7 +3,9 @@ package com.example.mybudgettrack;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +46,9 @@ public class BajetListActivity extends AppCompatActivity {
     ProgressDialog pd;
     FloatingActionButton floatingActionButton;
 
+
+    private SharedPreferences preferences;
+
     private static final String CHANNEL_ID = "OverspendingChannel";
     // Notification ID
     private static final int NOTIFICATION_ID = 1;
@@ -55,6 +60,10 @@ public class BajetListActivity extends AppCompatActivity {
         actionBar.setTitle("List Data");
         //init firestore
         db = FirebaseFirestore.getInstance();
+
+        //initialize prefrecense to hold daily expenditure value
+        preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
 
         //initialize view
         mRecyclerView=findViewById(R.id.recycler_view);
@@ -75,6 +84,10 @@ public class BajetListActivity extends AppCompatActivity {
         pd = new ProgressDialog(this);
         //show data in recycler view
         showData();
+
+    }
+    private double retrieveDailyExpenditure() {
+        return preferences.getFloat("dailyExpenditure", 0.0f);
     }
 
     private void showData() {
@@ -113,6 +126,7 @@ public class BajetListActivity extends AppCompatActivity {
 
                             modelList.add(model);
                          }
+                        // Retrieve the dailyExpenditure value from SharedPreferences
 
                         // Calculate the total money spent for the same date and check for overspending
                         for (BajetModel model : modelList) {
@@ -121,7 +135,7 @@ public class BajetListActivity extends AppCompatActivity {
                                 double totalMoneySpent = totalMoneySpentByDate.get(dateOfSpend);
                                 model.setTotalMoneySpent(totalMoneySpent);
 
-                                if (totalMoneySpent > 30) {
+                                if (totalMoneySpent > retrieveDailyExpenditure()) {
                                     showOverspendingNotification(totalMoneySpent, dateOfSpend);
                                 }
                             }
@@ -142,7 +156,7 @@ public class BajetListActivity extends AppCompatActivity {
     }
 
     private void showOverspendingNotification(double totalMoneySpent, String dateOfSpend) {
-        String message = "You have overspent " + (totalMoneySpent - 30) + " on " + dateOfSpend;
+        String message = "You have overspent " + (totalMoneySpent - retrieveDailyExpenditure()) + " on " + dateOfSpend;
 
         // Create a notification channel (required for newer Android versions)
         createNotificationChannel();
