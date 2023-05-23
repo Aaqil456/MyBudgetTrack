@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    RelativeLayout btnBajet,btnSetBajet;
+    RelativeLayout btnBajet,btnSetBajet,btnBil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         btnBajet = findViewById(R.id.btnBajet);
         btnSetBajet=findViewById(R.id.btnSetBajet);
+        btnBil=findViewById(R.id.btnBil);
 
         btnSetBajet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnBil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,BilListActivity.class));
+            }
+        });
     }
 
 

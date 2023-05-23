@@ -23,6 +23,9 @@
             android:name=".BajetListActivity"
             android:exported="false" />
         <activity
+            android:name=".BilListActivity"
+            android:exported="false" />
+        <activity
             android:name=".Bajet"
             android:exported="false" />
         <activity
@@ -30,9 +33,6 @@
             android:exported="false" />
         <activity
             android:name=".TunjukGraf"
-            android:exported="false" />
-        <activity
-            android:name=".CiptaBil"
             android:exported="false" />
         <activity
             android:name=".register_user"

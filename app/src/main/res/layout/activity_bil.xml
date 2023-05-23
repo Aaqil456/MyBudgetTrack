@@ -1,23 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Bil">
+    android:background="@drawable/pink_gradient_background"
+    tools:context=".Bil"
+    android:orientation="vertical">
+
+
+    <!-- Edit Text input wang-->
+    <EditText
+        android:id="@+id/etWang"
+        android:hint="masukkan perbelanjaan(RM)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:inputType="numberDecimal"
+        android:padding="10dp"
+        android:background="@color/white"/>
+
+    <!-- Edit Text input tarikh-->
+    <TextView
+        android:id="@+id/etTarikh"
+        android:hint="tekan untuk pilih tarikh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:onClick="showDatePickerDialog"
+        android:background="@color/white"/>
+
+    <!-- Edit Text input jenis-->
+
+    <!-- Edit Text input penerangan-->
+
+    <EditText
+        android:id="@+id/etPenerangan"
+        android:hint="masukkan penerangan perbelanjaan"
+        android:minHeight="350dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:inputType="text"
+        android:padding="10dp"
+        android:background="@color/white"/>
 
     <Button
-        android:id="@+id/buttonNext"
+        android:id="@+id/saveBtn"
+        android:text="Simpan"
+        android:backgroundTint="@color/login_button"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="149dp"
-        android:layout_marginTop="109dp"
-        android:layout_marginEnd="168dp"
-        android:layout_marginBottom="653dp"
-        android:text="Tambah"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Button to show list of item-->
+    <Button
+        android:id="@+id/listBtn"
+        android:text="Show List"
+        android:backgroundTint="@color/login_button"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
