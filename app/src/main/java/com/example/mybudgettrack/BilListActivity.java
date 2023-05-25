@@ -131,4 +131,13 @@ public class BilListActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+    @Override
+    public void onBackPressed() {
+        // Handle the back button press
+        Intent intent = new Intent(BilListActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish(); // Optional: If you don't want to keep the SecondActivity in the back stack
+    }
 }

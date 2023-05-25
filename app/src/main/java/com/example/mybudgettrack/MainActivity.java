@@ -17,13 +17,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.DecimalFormat;
+
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    RelativeLayout btnBajet,btnSetBajet,btnBil;
+    RelativeLayout btnBajet,btnSetBajet,btnBil,btnGraf;
     TextView tvDailyExp;
     private SharedPreferences preferences;
     private static final String PREFS_NAME = "MyPrefs";
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         btnBajet = findViewById(R.id.btnBajet);
         btnSetBajet=findViewById(R.id.btnSetBajet);
         btnBil=findViewById(R.id.btnBil);
+        btnGraf=findViewById(R.id.btnGraf);
+
+
         tvDailyExp=findViewById(R.id.tvDailyExp);
 
         preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
@@ -57,8 +65,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnGraf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,GraphActivity.class));
+            }
+        });
+
         float savedDailyExpenditure = preferences.getFloat("dailyExpenditure", 0.0f);
-        tvDailyExp.setText(String.valueOf(savedDailyExpenditure));
+        tvDailyExp.setText("RM "+String.valueOf(decimalFormat.format(savedDailyExpenditure)));
 
 
     }
