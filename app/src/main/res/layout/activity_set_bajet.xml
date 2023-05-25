@@ -80,6 +80,7 @@
         android:textSize="32sp"
         android:textStyle="bold" />
 
+
     <TextView
         android:id="@+id/result_display"
         android:layout_width="match_parent"

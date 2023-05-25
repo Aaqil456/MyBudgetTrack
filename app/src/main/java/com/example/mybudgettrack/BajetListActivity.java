@@ -208,6 +208,14 @@ public class BajetListActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    public void onBackPressed() {
+        // Handle the back button press
+        Intent intent = new Intent(BajetListActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish(); // Optional: If you don't want to keep the SecondActivity in the back stack
+    }
+
 /*
     private void searchData(String s) {
         pd.setTitle("Cari...");

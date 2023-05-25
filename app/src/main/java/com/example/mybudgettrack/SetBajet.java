@@ -1,6 +1,7 @@
 package com.example.mybudgettrack;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +33,7 @@ public class SetBajet extends AppCompatActivity {
         calculateButton = findViewById(R.id.button_calculate);
         resultDisplay = findViewById(R.id.result_display);
 
-        double dailyExpenditure;
+
 
         // Set click listener for calculate button
         calculateButton.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +58,7 @@ public class SetBajet extends AppCompatActivity {
 
                 // Calculate daily expenditure
                 double dailyExpenditure;
-                if (timePeriod.equals("Weekly")) {
+                if (timePeriod.equals("Week")) {
                     dailyExpenditure = budget / 7;
                 } else {
                     dailyExpenditure = budget / 30;
@@ -79,5 +80,13 @@ public class SetBajet extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Handle the back button press
+        Intent intent = new Intent(SetBajet.this, MainActivity.class);
+        startActivity(intent);
+        finish(); // Optional: If you don't want to keep the SecondActivity in the back stack
     }
 }

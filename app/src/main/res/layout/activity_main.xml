@@ -7,6 +7,15 @@
     android:background="@drawable/pink_gradient_background"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/tvDailyExp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/OuterLayer"
+        android:text="Weeeee"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <RelativeLayout
         android:id="@+id/OuterLayer"
@@ -14,8 +23,8 @@
         android:layout_height="400dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="279dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/edittext_background"
@@ -61,7 +70,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -85,7 +93,7 @@
                 android:layout_below="@id/imgBajet"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="6dp"
-                android:text="Set Bajet" />
+                android:text="Add Expense" />
 
         </RelativeLayout>
 
@@ -118,7 +126,7 @@
                 android:layout_below="@id/imgBil"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="6dp"
-                android:text="Set Bajet" />
+                android:text="Pay Bil" />
 
         </RelativeLayout>
 
@@ -154,6 +162,7 @@
                 android:text="Graf" />
 
         </RelativeLayout>
+
     </RelativeLayout>
 
 

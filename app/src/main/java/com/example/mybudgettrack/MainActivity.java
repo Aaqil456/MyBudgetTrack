@@ -1,11 +1,14 @@
 package com.example.mybudgettrack;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +21,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     RelativeLayout btnBajet,btnSetBajet,btnBil;
+    TextView tvDailyExp;
+    private SharedPreferences preferences;
+    private static final String PREFS_NAME = "MyPrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         btnBajet = findViewById(R.id.btnBajet);
         btnSetBajet=findViewById(R.id.btnSetBajet);
         btnBil=findViewById(R.id.btnBil);
+        tvDailyExp=findViewById(R.id.tvDailyExp);
+
+        preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
         btnSetBajet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +56,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,BilListActivity.class));
             }
         });
-    }
 
+        float savedDailyExpenditure = preferences.getFloat("dailyExpenditure", 0.0f);
+        tvDailyExp.setText(String.valueOf(savedDailyExpenditure));
+
+
+    }
 
 
     @Override
