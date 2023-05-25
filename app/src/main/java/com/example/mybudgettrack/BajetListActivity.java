@@ -57,7 +57,7 @@ public class BajetListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bajet_list);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("List Data");
+        actionBar.setTitle("Senarai Perbelanjaan");
         //init firestore
         db = FirebaseFirestore.getInstance();
 
@@ -92,7 +92,7 @@ public class BajetListActivity extends AppCompatActivity {
 
     private void showData() {
         //set title of progress dialog
-        pd.setTitle("Loading data....");
+        pd.setTitle("Sedang memuat turun senarai perbelanjaan....");
         pd.show();
         
         db.collection("bajet1")

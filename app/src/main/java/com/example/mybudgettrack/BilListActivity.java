@@ -42,7 +42,7 @@ public class BilListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bil_list);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("List Data");
+        actionBar.setTitle("Senarai Bil");
         //init firestore
         db = FirebaseFirestore.getInstance();
 
@@ -71,7 +71,7 @@ public class BilListActivity extends AppCompatActivity {
 
     private void showData() {
         //set title of progress dialog
-        pd.setTitle("Loading data....");
+        pd.setTitle("Sedang memuat turun senarai bil....");
         pd.show();
 
         db.collection("bil1")
@@ -112,7 +112,7 @@ public class BilListActivity extends AppCompatActivity {
 
     public void deleteData(int index){
         //set title of progress dialog
-        pd.setTitle("Deleting data....");
+        pd.setTitle("Membuang bil....");
         pd.show();
         db.collection("bil1").document(modelList.get(index).getId())
                 .delete()

@@ -93,7 +93,7 @@
                 android:layout_below="@id/imgBajet"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="6dp"
-                android:text="Add Expense" />
+                android:text="Tambah Belanja" />
 
         </RelativeLayout>
 
@@ -126,7 +126,7 @@
                 android:layout_below="@id/imgBil"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="6dp"
-                android:text="Pay Bil" />
+                android:text="Bayar Bil" />
 
         </RelativeLayout>
 

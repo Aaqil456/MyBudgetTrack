@@ -58,7 +58,7 @@ public class Bajet extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
             //Update Data
-            actionBar.setTitle("Update Data");
+            actionBar.setTitle("Kemaskini Perbelanjaan");
             btnSimpan.setText("Kemaskini");
 
             //get data
@@ -75,8 +75,8 @@ public class Bajet extends AppCompatActivity {
         }
         else{
             //new data
-            actionBar.setTitle("Add Data");
-            btnSimpan.setText("Simpan");
+            actionBar.setTitle("Tambah Perbelanjaan");
+            btnSimpan.setText("Tambah");
         }
 
 

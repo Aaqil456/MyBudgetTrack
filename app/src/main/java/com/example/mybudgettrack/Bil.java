@@ -41,7 +41,7 @@ public class Bil extends AppCompatActivity {
         setContentView(R.layout.activity_bil);
         //action bar
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Tambah Data");
+        actionBar.setTitle("Tambah Bil");
         //initialize
         etWang=findViewById(R.id.etWang);
         etTarikh=findViewById(R.id.etTarikh);
@@ -56,7 +56,7 @@ public class Bil extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
             //Update Data
-            actionBar.setTitle("Update Data");
+            actionBar.setTitle("Kemaskini Bil");
             btnSimpan.setText("Kemaskini");
 
             //get data
@@ -73,8 +73,8 @@ public class Bil extends AppCompatActivity {
         }
         else{
             //new data
-            actionBar.setTitle("Add Data");
-            btnSimpan.setText("Simpan");
+            actionBar.setTitle("Tambah Bil");
+            btnSimpan.setText("Tambah");
         }
 
         //progress dialog
