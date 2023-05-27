@@ -31,35 +31,40 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <RadioGroup
-        android:id="@+id/radiogroup_duration"
+    <TextView
+        android:id="@+id/btnSetStartDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edittext_budget"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal"
-        android:checkedButton="@+id/radiobutton_week">
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rounder_corner_background"
+        android:hint="Pilih tarikh mula"
+        android:padding="10dp"/>
 
-        <RadioButton
-            android:id="@+id/radiobutton_week"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Week"
-            android:textSize="24sp" />
 
-        <RadioButton
-            android:id="@+id/radiobutton_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Month"
-            android:textSize="24sp" />
-    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/btnSetEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSetStartDate"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rounder_corner_background"
+        android:hint="Pilih tarikh tamat"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/button_calculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/radiogroup_duration"
+        android:layout_below="@id/btnSetEndDate"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/button_rounded_bg"
