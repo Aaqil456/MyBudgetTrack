@@ -24,25 +24,40 @@
         android:layout_below="@id/textview_budget_title"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/edittext_rounded_border"
-        android:hint="Enter your budget"
+        android:background="@drawable/rounder_corner_background"
+        android:hint="Isi bajet sepanjang tempoh"
         android:inputType="numberDecimal"
-        android:textColorHint="#808080"
+        android:textColorHint="#020202"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edittext_saving"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_budget"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounder_corner_background"
+        android:hint="Isi matlamat simpanan"
+        android:inputType="numberDecimal"
+        android:textColorHint="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
 
     <TextView
         android:id="@+id/btnSetStartDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edittext_budget"
+        android:layout_below="@id/edittext_saving"
         android:layout_marginStart="35dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/rounder_corner_background"
         android:hint="Pilih tarikh mula"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 
 
 

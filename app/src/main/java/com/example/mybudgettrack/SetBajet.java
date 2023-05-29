@@ -19,7 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SetBajet extends AppCompatActivity {
-    private EditText budgetInput;
+    private EditText budgetInput,savingInput;
     private Button calculateButton;
     private TextView resultDisplay;
     private TextView btnSetStartDate, btnSetEndDate;
@@ -33,6 +33,8 @@ public class SetBajet extends AppCompatActivity {
 
         // Initialize views
         budgetInput = findViewById(R.id.edittext_budget);
+        savingInput = findViewById(R.id.edittext_saving);
+
         calculateButton = findViewById(R.id.button_calculate);
         resultDisplay = findViewById(R.id.result_display);
         btnSetStartDate = findViewById(R.id.btnSetStartDate);
@@ -66,17 +68,13 @@ public class SetBajet extends AppCompatActivity {
                 }
                 double budget = Double.parseDouble(budgetString);
 
-                // Get time period selection
-
                 // Calculate daily expenditure
                 double dailyExpenditure=budget/calculateNumberOfDays();
 
-                /*
-                if (timePeriod.equals("Week")) {
-                    dailyExpenditure = budget / 7;
-                } else {
-                    dailyExpenditure = budget / 30;
-                }*/
+                // Get saving input
+                String savingString = savingInput.getText().toString();
+
+                double saving = Double.parseDouble(savingString);
 
                 // Set the dailyExpenditure in the Singleton
                 DailyExpenditureSingleton.getInstance().setDailyExpenditure(dailyExpenditure);
@@ -89,7 +87,11 @@ public class SetBajet extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putFloat("dailyExpenditure", (float) dailyExpenditure);
+                // Save the dailyExpenditure value in SharedPreferences
+                editor.putFloat("Saving", (float) saving);
                 editor.apply();
+
+
 
             }
         });

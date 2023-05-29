@@ -9,11 +9,11 @@
 
 
     <LinearLayout
+        android:id="@+id/parentLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/OuterLayer"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvtext"
@@ -23,6 +23,7 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="30sp" />
+
         <TextView
             android:id="@+id/tvDailyExp"
             android:layout_width="match_parent"
@@ -31,6 +32,26 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="25sp" />
+
+
+        <TextView
+            android:id="@+id/tvSaving"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Saving: Saving"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tvSavingGoal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Saving goal: Saving"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
 
     </LinearLayout>
 

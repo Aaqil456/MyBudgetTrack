@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,11 +24,11 @@ import java.text.DecimalFormat;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     RelativeLayout btnBajet,btnSetBajet,btnBil,btnGraf;
-    TextView tvDailyExp;
+    TextView tvDailyExp,tvSavingGoal,tvSaving;
     private SharedPreferences preferences;
     private static final String PREFS_NAME = "MyPrefs";
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
-
+    LinearLayout parentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,18 @@ public class MainActivity extends AppCompatActivity {
         btnGraf=findViewById(R.id.btnGraf);
 
 
-        tvDailyExp=findViewById(R.id.tvDailyExp);
+        // Find the parent layout
+         parentLayout = findViewById(R.id.parentLayout);
+
+        // Find the TextView elements within the parent layout
+        tvDailyExp = parentLayout.findViewById(R.id.tvDailyExp);
+        tvSavingGoal = parentLayout.findViewById(R.id.tvSavingGoal);
+        tvSaving = parentLayout.findViewById(R.id.tvSaving);
+
+
+//        tvDailyExp=findViewById(R.id.tvDailyExp);
+//        tvSavingGoal=findViewById(R.id.tvSavingGoal);
+
 
         preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
@@ -73,7 +85,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         float savedDailyExpenditure = preferences.getFloat("dailyExpenditure", 0.0f);
+        float savingGoal = preferences.getFloat("Saving", 0.0f);
+        float saving = preferences.getFloat("totalSaving", 0.0f);
+
         tvDailyExp.setText("RM "+String.valueOf(decimalFormat.format(savedDailyExpenditure)));
+        tvSavingGoal.setText("Saving goal: RM "+String.valueOf(decimalFormat.format(savingGoal)));
+        tvSaving.setText("Saving : RM "+String.valueOf(decimalFormat.format(saving)));
+
 
 
     }

@@ -52,6 +52,10 @@ public class BajetListActivity extends AppCompatActivity {
     private static final String CHANNEL_ID = "OverspendingChannel";
     // Notification ID
     private static final int NOTIFICATION_ID = 1;
+
+    // Added variable for saving total
+    private double savingTotal = 0.0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,6 +141,14 @@ public class BajetListActivity extends AppCompatActivity {
 
                                 if (totalMoneySpent > retrieveDailyExpenditure()) {
                                     showOverspendingNotification(totalMoneySpent, dateOfSpend);
+                                }else{
+                                    double overspentAmount = retrieveDailyExpenditure() - totalMoneySpent;
+                                    savingTotal += overspentAmount;
+                                    // Inside your activity or fragment
+                                    Toast.makeText(getApplicationContext(), "This is a Toast message "+savingTotal, Toast.LENGTH_SHORT).show();
+
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putFloat("totalSaving", (float) savingTotal);
                                 }
                             }
                         }
