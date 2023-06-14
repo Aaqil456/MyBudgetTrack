@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,10 +14,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mybudgettrack.User.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DecimalFormat;
 
@@ -29,16 +37,20 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefs";
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
     LinearLayout parentLayout;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         btnBajet = findViewById(R.id.btnBajet);
         btnSetBajet=findViewById(R.id.btnSetBajet);
         btnBil=findViewById(R.id.btnBil);
         btnGraf=findViewById(R.id.btnGraf);
+
+        String userId = mAuth.getCurrentUser().getUid();
 
 
         // Find the parent layout
@@ -92,9 +104,31 @@ public class MainActivity extends AppCompatActivity {
         tvSavingGoal.setText("Saving goal: RM "+String.valueOf(decimalFormat.format(savingGoal)));
         tvSaving.setText("Saving : RM "+String.valueOf(decimalFormat.format(saving)));
 
-
-
     }
+
+
+
+    private void getUserData(String userId) {
+        DocumentReference userRef = db.collection("users").document(userId);
+        userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        User user = document.toObject(User.class);
+                        String userName = user.getUserName();
+                        // Use the userName as needed
+                        ActionBar actionBar = getSupportActionBar();
+                        actionBar.setTitle("Welcome, "+userName);
+                    }
+                } else {
+                    Log.d("Firestore", "Error getting user document: " + task.getException());
+                }
+            }
+        });
+    }
+
 
 
     @Override
@@ -124,14 +158,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
+            // User is not signed in, redirect to login activity
             Intent intent = new Intent(MainActivity.this, login.class);
             startActivity(intent);
             finish();
+        } else {
+            // User is signed in, retrieve user data
+            String userId = mAuth.getCurrentUser().getUid();
+            getUserData(userId);
         }
     }
-    }
+
+}
 
 
