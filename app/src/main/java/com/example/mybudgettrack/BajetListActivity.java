@@ -29,7 +29,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,23 +134,32 @@ public class BajetListActivity extends AppCompatActivity {
                          }
                         // Retrieve the dailyExpenditure value from SharedPreferences
 
+                        // Get the current date
+                        Date currentDate = new Date();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        String currentDateString = dateFormat.format(currentDate);
                         // Calculate the total money spent for the same date and check for overspending
                         for (BajetModel model : modelList) {
                             String dateOfSpend = model.getTarikhBajet();
-                            if (totalMoneySpentByDate.containsKey(dateOfSpend)) {
-                                double totalMoneySpent = totalMoneySpentByDate.get(dateOfSpend);
-                                model.setTotalMoneySpent(totalMoneySpent);
+                            if (dateOfSpend.equals(currentDateString)) { // Compare with current date
+                                if (totalMoneySpentByDate.containsKey(dateOfSpend)) {
+                                    double totalMoneySpent = totalMoneySpentByDate.get(dateOfSpend);
+                                    model.setTotalMoneySpent(totalMoneySpent);
 
-                                if (totalMoneySpent > retrieveDailyExpenditure()) {
-                                    showOverspendingNotification(totalMoneySpent, dateOfSpend);
-                                }else{
-                                    double overspentAmount = retrieveDailyExpenditure() - totalMoneySpent;
-                                    savingTotal += overspentAmount;
-                                    // Inside your activity or fragment
-                                    Toast.makeText(getApplicationContext(), "This is a Toast message "+savingTotal, Toast.LENGTH_SHORT).show();
+                                    if (totalMoneySpent > retrieveDailyExpenditure()) {
+                                        showOverspendingNotification(totalMoneySpent, dateOfSpend);
+                                    } else {
+                                        double overspentAmount = retrieveDailyExpenditure() - totalMoneySpent;
+                                        savingTotal += overspentAmount;
 
-                                    SharedPreferences.Editor editor = preferences.edit();
-                                    editor.putFloat("totalSaving", (float) savingTotal);
+                                        // Inside your activity or fragment
+                                        Toast.makeText(getApplicationContext(), "This is a Toast message " + savingTotal, Toast.LENGTH_SHORT).show();
+
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putFloat("totalSaving", (float) savingTotal);
+                                        // Apply the changes to the shared preferences
+                                        editor.apply();
+                                    }
                                 }
                             }
                         }

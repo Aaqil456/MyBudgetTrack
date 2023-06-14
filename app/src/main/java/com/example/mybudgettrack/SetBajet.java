@@ -1,9 +1,7 @@
 package com.example.mybudgettrack;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +23,8 @@ public class SetBajet extends AppCompatActivity {
     private TextView btnSetStartDate, btnSetEndDate;
     private Calendar startDate, endDate;
 
+
+
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,11 @@ public class SetBajet extends AppCompatActivity {
         resultDisplay = findViewById(R.id.result_display);
         btnSetStartDate = findViewById(R.id.btnSetStartDate);
         btnSetEndDate = findViewById(R.id.btnSetEndDate);
+
+
+
+
+
 
         btnSetStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,13 +68,15 @@ public class SetBajet extends AppCompatActivity {
                 // Get budget input
                 String budgetString = budgetInput.getText().toString();
                 if (budgetString.isEmpty()) {
-                    resultDisplay.setText("Please enter a budget amount.");
+
+                    resultDisplay.setText("isi semua tempat kosong");
                     return;
                 }
                 double budget = Double.parseDouble(budgetString);
 
                 // Calculate daily expenditure
                 double dailyExpenditure=budget/calculateNumberOfDays();
+                String dailyExpenditure_str=String.valueOf(dailyExpenditure);
 
                 // Get saving input
                 String savingString = savingInput.getText().toString();
@@ -83,13 +90,6 @@ public class SetBajet extends AppCompatActivity {
                 String result = "Your daily expenditure is RM" + decimalFormat.format(dailyExpenditure);
                 resultDisplay.setText(result);
 
-                // Save the dailyExpenditure value in SharedPreferences
-                SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putFloat("dailyExpenditure", (float) dailyExpenditure);
-                // Save the dailyExpenditure value in SharedPreferences
-                editor.putFloat("Saving", (float) saving);
-                editor.apply();
 
 
 
@@ -97,6 +97,8 @@ public class SetBajet extends AppCompatActivity {
         });
 
     }
+
+
 
     public void setStartDate(View view) {
         showDatePickerDialog(true);

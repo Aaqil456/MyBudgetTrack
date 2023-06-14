@@ -33,7 +33,6 @@ public class Bajet extends AppCompatActivity {
     Button btnSimpan,mListButton;
     ProgressDialog pd;
     FirebaseFirestore db;
-
     String pId,pWang,pTarikh,pPenerangan;
 
     @Override
