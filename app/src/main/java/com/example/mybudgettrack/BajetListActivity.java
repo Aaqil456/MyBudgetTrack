@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,14 +22,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mybudgettrack.Adapter.BajetAdapter;
 import com.example.mybudgettrack.Model.BajetModel;
+import com.example.mybudgettrack.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +46,7 @@ public class BajetListActivity extends AppCompatActivity {
 
     List<BajetModel> modelList = new ArrayList<>();
     RecyclerView mRecyclerView;
+    private FirebaseAuth mAuth;
     //layout manager for recycler view
     RecyclerView.LayoutManager layoutManager;
     //firestore instance
@@ -47,6 +54,8 @@ public class BajetListActivity extends AppCompatActivity {
     BajetAdapter adapter;
     ProgressDialog pd;
     FloatingActionButton floatingActionButton;
+
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
 
     private SharedPreferences preferences;
@@ -69,7 +78,7 @@ public class BajetListActivity extends AppCompatActivity {
 
         //initialize prefrecense to hold daily expenditure value
         preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-
+        mAuth = FirebaseAuth.getInstance();
 
         //initialize view
         mRecyclerView=findViewById(R.id.recycler_view);
@@ -93,7 +102,8 @@ public class BajetListActivity extends AppCompatActivity {
 
     }
     private double retrieveDailyExpenditure() {
-        return preferences.getFloat("dailyExpenditure", 0.0f);
+
+       return 0.0;
     }
 
     private void showData() {
@@ -121,6 +131,8 @@ public class BajetListActivity extends AppCompatActivity {
                         // Get the date of spend
                         String dateOfSpend = doc.getString("Tarikh perbelanjaan");
 
+
+
                         // Calculate the total money spent for each date
                         double moneySpent = Double.parseDouble(doc.getString("Wang perbelanjaan"));
                         if (totalMoneySpentByDate.containsKey(dateOfSpend)) {
@@ -146,20 +158,59 @@ public class BajetListActivity extends AppCompatActivity {
                                     double totalMoneySpent = totalMoneySpentByDate.get(dateOfSpend);
                                     model.setTotalMoneySpent(totalMoneySpent);
 
-                                    if (totalMoneySpent > retrieveDailyExpenditure()) {
-                                        showOverspendingNotification(totalMoneySpent, dateOfSpend);
-                                    } else {
-                                        double overspentAmount = retrieveDailyExpenditure() - totalMoneySpent;
-                                        savingTotal += overspentAmount;
+                                    String userId = mAuth.getCurrentUser().getUid();
+                                    DocumentReference userRef = db.collection("users").document(userId);
+                                    userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                DocumentSnapshot document = task.getResult();
+                                                if (document != null && document.exists()) {
+                                                    User user = document.toObject(User.class);
+                                                    String userName = user.getUserName();
+                                                    Double userDailyExp=user.getUserDailyExpenses();
+                                                    Double userSavingGoal=user.getUserSavingGoal();
 
-                                        // Inside your activity or fragment
-                                        Toast.makeText(getApplicationContext(), "This is a Toast message " + savingTotal, Toast.LENGTH_SHORT).show();
+                                                    if (totalMoneySpent > userDailyExp) {
+                                                        showOverspendingNotification(totalMoneySpent, userDailyExp,dateOfSpend);
+                                                    } else {
 
-                                        SharedPreferences.Editor editor = preferences.edit();
-                                        editor.putFloat("totalSaving", (float) savingTotal);
-                                        // Apply the changes to the shared preferences
-                                        editor.apply();
-                                    }
+                                                        double overspentAmount = userDailyExp - totalMoneySpent;
+                                                        savingTotal += overspentAmount;
+
+                                                        // Update the userDailyExpenditure in Firestore
+                                                        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                        DocumentReference userRef = db.collection("users").document(userId);
+                                                        userRef.update("userTotalSaving", overspentAmount)
+                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+                                                                        // Value updated successfully
+                                                                        Toast.makeText(BajetListActivity.this, "Total Saving updated in Firestore", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                })
+                                                                .addOnFailureListener(new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@io.reactivex.rxjava3.annotations.NonNull Exception e) {
+                                                                        // Value update failed
+                                                                        Toast.makeText(BajetListActivity.this, "Failed to update Total Saving : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                });
+
+                                                        // Inside your activity or fragment
+                                                        Toast.makeText(getApplicationContext(), "This is a Toast message " + savingTotal, Toast.LENGTH_SHORT).show();
+
+                                                    }
+
+                                                }
+                                            } else {
+                                                Log.d("Firestore", "Error getting user document: " + task.getException());
+                                            }
+                                        }
+                                    });
+
+
+
                                 }
                             }
                         }
@@ -178,8 +229,9 @@ public class BajetListActivity extends AppCompatActivity {
                 });
     }
 
-    private void showOverspendingNotification(double totalMoneySpent, String dateOfSpend) {
-        String message = "You have overspent " + (totalMoneySpent - retrieveDailyExpenditure()) + " on " + dateOfSpend;
+    private void showOverspendingNotification(double totalMoneySpent,double dailyExpenditure, String dateOfSpend) {
+
+        String message = "You have overspent " + decimalFormat.format((totalMoneySpent - dailyExpenditure)) + " on " + dateOfSpend;
 
         // Create a notification channel (required for newer Android versions)
         createNotificationChannel();
@@ -239,75 +291,5 @@ public class BajetListActivity extends AppCompatActivity {
         finish(); // Optional: If you don't want to keep the SecondActivity in the back stack
     }
 
-/*
-    private void searchData(String s) {
-        pd.setTitle("Cari...");
-        pd.show();
 
-        db.collection("bajet1").whereEqualTo("search",s.toLowerCase())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        modelList.clear();
-                        pd.dismiss();
-
-                        for(DocumentSnapshot doc: task.getResult()){
-                            BajetModel model = new BajetModel(doc.getString("id")
-                                    ,doc.getString("Wang perbelanjaan")
-                                    ,doc.getString("Tarikh perbelanjaan")
-                                    ,doc.getString("Penerangan perbelanjaan"));
-                            modelList.add(model);
-                        }
-                        //adapter
-                        adapter = new BajetAdapter(BajetListActivity.this,modelList);
-                        //set adapter to recycler view
-                        mRecyclerView.setAdapter(adapter);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pd.dismiss();
-                        Toast.makeText(BajetListActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    //menu
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        //inflating main_menu.xml
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-
-        //search view
-        MenuItem item = menu.findItem(R.id.action_search);
-        SearchView searchView =  (SearchView) MenuItemCompat.getActionView(item);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                //called when press search button
-                searchData(s);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                //called when we are typing
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    
-    }
-
-    */
 }

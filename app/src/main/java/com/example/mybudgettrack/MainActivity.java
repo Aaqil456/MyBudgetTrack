@@ -96,13 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        float savedDailyExpenditure = preferences.getFloat("dailyExpenditure", 0.0f);
-        float savingGoal = preferences.getFloat("Saving", 0.0f);
-        float saving = preferences.getFloat("totalSaving", 0.0f);
 
-        tvDailyExp.setText("RM "+String.valueOf(decimalFormat.format(savedDailyExpenditure)));
-        tvSavingGoal.setText("Saving goal: RM "+String.valueOf(decimalFormat.format(savingGoal)));
-        tvSaving.setText("Saving : RM "+String.valueOf(decimalFormat.format(saving)));
 
     }
 
@@ -118,9 +112,18 @@ public class MainActivity extends AppCompatActivity {
                     if (document != null && document.exists()) {
                         User user = document.toObject(User.class);
                         String userName = user.getUserName();
+                        Double userDailyExp=user.getUserDailyExpenses();
+                        Double userSavingGoal=user.getUserSavingGoal();
+                        Double userSaving= user.getUserTotalSaving();
                         // Use the userName as needed
                         ActionBar actionBar = getSupportActionBar();
                         actionBar.setTitle("Welcome, "+userName);
+
+                        // Use the other variable as needed
+                        tvDailyExp.setText("RM "+String.valueOf(decimalFormat.format(userDailyExp)));
+                        tvSavingGoal.setText("Saving goal: RM "+String.valueOf(decimalFormat.format(userSavingGoal)));
+                        tvSaving.setText("Saving : RM "+String.valueOf(decimalFormat.format(userSaving)));
+
                     }
                 } else {
                     Log.d("Firestore", "Error getting user document: " + task.getException());

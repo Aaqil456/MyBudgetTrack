@@ -8,13 +8,22 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import io.reactivex.rxjava3.annotations.NonNull;
 
 public class SetBajet extends AppCompatActivity {
     private EditText budgetInput,savingInput;
@@ -22,7 +31,7 @@ public class SetBajet extends AppCompatActivity {
     private TextView resultDisplay;
     private TextView btnSetStartDate, btnSetEndDate;
     private Calendar startDate, endDate;
-
+    private FirebaseFirestore db;
 
 
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -40,6 +49,8 @@ public class SetBajet extends AppCompatActivity {
         btnSetStartDate = findViewById(R.id.btnSetStartDate);
         btnSetEndDate = findViewById(R.id.btnSetEndDate);
 
+        // Initialize FirebaseFirestore
+        db = FirebaseFirestore.getInstance();
 
 
 
@@ -90,7 +101,24 @@ public class SetBajet extends AppCompatActivity {
                 String result = "Your daily expenditure is RM" + decimalFormat.format(dailyExpenditure);
                 resultDisplay.setText(result);
 
-
+                // Update the userDailyExpenditure in Firestore
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DocumentReference userRef = db.collection("users").document(userId);
+                userRef.update("userDailyExpenses", dailyExpenditure,"userSavingGoal",saving)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Value updated successfully
+                                Toast.makeText(SetBajet.this, "Daily expenditure updated in Firestore", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Value update failed
+                                Toast.makeText(SetBajet.this, "Failed to update daily expenditure: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
 
             }
