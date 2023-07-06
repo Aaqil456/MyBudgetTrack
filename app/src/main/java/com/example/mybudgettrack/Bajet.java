@@ -51,6 +51,10 @@ public class Bajet extends AppCompatActivity {
         mListButton=findViewById(R.id.listBtn);
 
 
+
+
+
+
         /*if come here after clicking update in alert dialog of BajetListactivity
         * then get data id, wang, tarikh, penerangan
         * change title of action bar and add save button*/
@@ -88,6 +92,25 @@ public class Bajet extends AppCompatActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(etWang.getText().toString().trim().isEmpty()){
+                    etWang.setError("field is empty");
+                    etWang.requestFocus();
+                    return;
+                }
+
+                if(etTarikh.getText().toString().trim().isEmpty()){
+                    etTarikh.setError("field is empty");
+                    etTarikh.requestFocus();
+                    return;
+                }
+
+                if(etWang.getText().toString().trim().isEmpty()){
+                    etPenerangan.setError("field is empty");
+                    etPenerangan.requestFocus();
+                    return;
+                }
+
                 Bundle bundle1 = getIntent().getExtras();
                 if(bundle !=null){
                     //updating
@@ -100,6 +123,23 @@ public class Bajet extends AppCompatActivity {
                     updateData(id,wang,tarikh,penerangan);
                 }
                 else{
+                    if(etWang.getText().toString().trim().isEmpty()){
+                        etWang.setError("field is empty");
+                        etWang.requestFocus();
+                        return;
+                    }
+
+                    if(etTarikh.getText().toString().trim().isEmpty()){
+                        etTarikh.setError("field is empty");
+                        etTarikh.requestFocus();
+                        return;
+                    }
+
+                    if(etWang.getText().toString().trim().isEmpty()){
+                        etPenerangan.setError("field is empty");
+                        etPenerangan.requestFocus();
+                        return;
+                    }
                     //adding new
                     //input data
                     String wang = etWang.getText().toString().trim();

@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         // Use the other variable as needed
                         tvDailyExp.setText("RM "+String.valueOf(decimalFormat.format(userDailyExp)));
                         tvSavingGoal.setText("Saving goal: RM "+String.valueOf(decimalFormat.format(userSavingGoal)));
-                        tvSaving.setText("Saving : RM "+String.valueOf(decimalFormat.format(userSaving)));
+                        tvSaving.setText("Saving today : RM "+String.valueOf(decimalFormat.format(userSaving)));
 
                     }
                 } else {
