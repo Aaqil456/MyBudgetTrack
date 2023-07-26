@@ -12,7 +12,7 @@
     <!-- Edit Text input wang-->
     <EditText
         android:id="@+id/etWang"
-        android:hint="masukkan perbelanjaan(RM)"
+        android:hint="masukkan bil pembayaran(RM)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -37,7 +37,7 @@
 
     <EditText
         android:id="@+id/etPenerangan"
-        android:hint="masukkan penerangan perbelanjaan"
+        android:hint="masukkan penerangan bil pembayaran"
         android:minHeight="350dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
     <Button
         android:id="@+id/saveBtn"
         android:text="Simpan"
-        android:backgroundTint="@color/login_button"
+        android:backgroundTint="@color/fab_background_color"
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
@@ -58,8 +58,8 @@
     <!-- Button to show list of item-->
     <Button
         android:id="@+id/listBtn"
-        android:text="Show List"
-        android:backgroundTint="@color/login_button"
+        android:text="papar senarai"
+        android:backgroundTint="@color/fab_background_color"
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:layout_width="wrap_content"

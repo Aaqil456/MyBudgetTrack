@@ -24,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import io.reactivex.rxjava3.annotations.NonNull;
 
 public class register_user extends AppCompatActivity {
-    Button btnDaftar;
+    Button btnDaftar,btnLogin;
     EditText etEmail, etPassword,etUserName;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -39,10 +39,20 @@ public class register_user extends AppCompatActivity {
         etPassword=findViewById(R.id.password);
         etUserName=findViewById(R.id.username);
         btnDaftar=findViewById(R.id.daftar_button);
+        btnLogin= findViewById(R.id.login_button);
         mAuth=FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         CollectionReference usersCollection = db.collection("users");
 
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            Intent intent;
+            @Override
+            public void onClick(View view) {
+                intent= new Intent(register_user.this,login.class);
+                startActivity(intent);
+            }
+        });
 
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -24,7 +24,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_plus"
-        app:backgroundTint="@color/purple_200"
+        app:backgroundTint="@color/fab_background_color"
         app:elevation="6dp"
         app:maxImageSize="48dp"
         app:rippleColor="@color/fab_ripple_color"

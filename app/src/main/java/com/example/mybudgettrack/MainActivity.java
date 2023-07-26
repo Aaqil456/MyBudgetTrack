@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnBil=findViewById(R.id.btnBil);
         btnGraf=findViewById(R.id.btnGraf);
 
-        String userId = mAuth.getCurrentUser().getUid();
+
 
 
         // Find the parent layout
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         btnGraf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, UserListActivity.class));
+                startActivity(new Intent(MainActivity.this, Graf.class));
             }
         });
 
@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             // User is signed in, retrieve user data
             String userId = mAuth.getCurrentUser().getUid();
             getUserData(userId);
+
         }
     }
 

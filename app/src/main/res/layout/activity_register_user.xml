@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/login_button"
+        android:backgroundTint="@color/fab_background_color"
         android:padding="16dp"
         android:text="@string/daftar_button_label"
         android:textSize="18sp" />
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/login_button"
+        android:backgroundTint="@color/fab_background_color"
         android:padding="16dp"
         android:text="@string/login_button_label"
         android:textSize="18sp" />

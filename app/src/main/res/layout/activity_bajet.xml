@@ -49,7 +49,7 @@
     <Button
         android:id="@+id/saveBtn"
         android:text="Simpan"
-        android:backgroundTint="@color/login_button"
+        android:backgroundTint="@color/fab_background_color"
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
@@ -58,8 +58,8 @@
     <!-- Button to show list of item-->
     <Button
         android:id="@+id/listBtn"
-        android:text="Show List"
-        android:backgroundTint="@color/login_button"
+        android:text="papar senarai"
+        android:backgroundTint="@color/fab_background_color"
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
