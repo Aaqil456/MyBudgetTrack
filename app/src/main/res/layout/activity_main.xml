@@ -199,6 +199,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Simpanan Saya: "
+                    android:layout_margin="20dp"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="25sp" />
@@ -207,6 +208,7 @@
                     android:id="@+id/tvSavingGoal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
                     android:text="Matlamat simpanan harian: "
                     android:textAlignment="center"
                     android:textColor="@color/black"

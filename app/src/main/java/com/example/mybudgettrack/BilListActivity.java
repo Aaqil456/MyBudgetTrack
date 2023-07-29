@@ -1,11 +1,14 @@
 package com.example.mybudgettrack;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -56,6 +59,7 @@ public class BilListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bil_list);
 
+        showPopup();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Senarai Bil");
@@ -82,6 +86,29 @@ public class BilListActivity extends AppCompatActivity {
         pd = new ProgressDialog(this);
         //show data in recycler view
         showData();
+
+
+    }
+    private void showPopup() {
+        // Inflate the popup layout
+        LayoutInflater inflater = getLayoutInflater();
+        View popupView = inflater.inflate(R.layout.bil_popup_layout, null);
+
+
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(popupView)
+                .setPositiveButton("Baik", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Handle the "OK" button click if needed
+                    }
+                });
+
+        // Create and show the AlertDialog
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
 
 
     }
@@ -165,7 +192,6 @@ public class BilListActivity extends AppCompatActivity {
         for (BilModel model : modelList) {
             if (model.getTarikhBayar().equals(currentDateString)) {
                 // Show in-app notification
-                Toast.makeText(this, "Over", Toast.LENGTH_SHORT).show();
                 showBilNotification(Double.parseDouble(model.getWangBil()),model.getTarikhBayar());
                 break; // No need to continue checking once a match is found
             }
@@ -175,7 +201,7 @@ public class BilListActivity extends AppCompatActivity {
 
     private void showBilNotification(double paymentMoney, String dateOfSpend) {
 
-        String message = "You have to pay RM" + paymentMoney+" by "+dateOfSpend;
+        String message = "Anda harus membayar sebanyak RM" + paymentMoney+" pada "+dateOfSpend;
 
         // Create a notification channel (required for newer Android versions)
         createNotificationChannel();
@@ -183,7 +209,7 @@ public class BilListActivity extends AppCompatActivity {
         // Create the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.notification_icon)
-                .setContentTitle("Bil Payment Alert")
+                .setContentTitle("Peringatan pembayaran bil")
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);

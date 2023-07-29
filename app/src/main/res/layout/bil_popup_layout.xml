@@ -1,0 +1,31 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/login_button"
+    android:layout_margin="16dp"
+    android:id="@+id/cardView"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+            <TextView
+                android:id="@+id/tvWang2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jika anda sudah membayar bil di dalam senara tekan bil di dalam senarai untuk seketika dan pilih sudah bayar"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

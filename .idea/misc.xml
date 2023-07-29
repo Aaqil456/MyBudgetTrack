@@ -28,8 +28,10 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/activity_register_user.xml" value="0.22" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/activity_set_bajet.xml" value="0.21" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/bajet_model_layout.xml" value="0.18" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/bajet_popup_layout.xml" value="0.16673792218896966" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/bajet_recycler_view.xml" value="0.22" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/bil_model_layout.xml" value="0.16673792218896966" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/bil_popup_layout.xml" value="0.16673792218896966" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/layout/user_model_layout.xml" value="0.1675929884566054" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyBudgetTrack/app/src/main/res/menu/main_menu.xml" value="0.1675929884566054" />
       </map>

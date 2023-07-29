@@ -1,14 +1,17 @@
 package com.example.mybudgettrack;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -73,6 +76,8 @@ public class BajetListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bajet_list);
+        showPopup();
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Senarai Perbelanjaan");
         //init firestore
@@ -103,10 +108,31 @@ public class BajetListActivity extends AppCompatActivity {
         showData();
 
     }
-    private double retrieveDailyExpenditure() {
 
-       return 0.0;
+    private void showPopup() {
+        // Inflate the popup layout
+        LayoutInflater inflater = getLayoutInflater();
+        View popupView = inflater.inflate(R.layout.bajet_popup_layout, null);
+
+
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(popupView)
+                .setPositiveButton("Baik", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Handle the "OK" button click if needed
+                    }
+                });
+
+        // Create and show the AlertDialog
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
     }
+
 
     private void showData() {
         //set title of progress dialog
@@ -255,7 +281,7 @@ public class BajetListActivity extends AppCompatActivity {
 
     private void showOverspendingNotification(double totalMoneySpent,double dailyExpenditure, String dateOfSpend) {
 
-        String message = "You have overspent " + decimalFormat.format((totalMoneySpent - dailyExpenditure)) + " on " + dateOfSpend;
+        String message = "Anda terlebih belanja " + decimalFormat.format((totalMoneySpent - dailyExpenditure)) + " on " + dateOfSpend;
 
         // Create a notification channel (required for newer Android versions)
         createNotificationChannel();
@@ -287,14 +313,14 @@ public class BajetListActivity extends AppCompatActivity {
 
     public void deleteData(int index){
         //set title of progress dialog
-        pd.setTitle("Deleting data....");
+        pd.setTitle("Membuang data....");
         pd.show();
         db.collection("bajet1").document(modelList.get(index).getId())
                 .delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(BajetListActivity.this, "Deleted ...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BajetListActivity.this, "Selesai dibuang ...", Toast.LENGTH_SHORT).show();
                         showData();
 
                     }
