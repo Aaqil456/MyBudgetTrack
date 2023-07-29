@@ -130,12 +130,12 @@ public class MainActivity extends AppCompatActivity {
                         Double userSaving= user.getUserTotalSaving();
                         // Use the userName as needed
                         ActionBar actionBar = getSupportActionBar();
-                        actionBar.setTitle("Welcome, "+userName);
+                        actionBar.setTitle("Selamat Datang,"+"\n"+userName);
 
                         // Use the other variable as needed
                         tvDailyExp.setText("RM "+String.valueOf(decimalFormat.format(userDailyExp)));
-                        tvSavingGoal.setText("Saving goal: RM "+String.valueOf(decimalFormat.format(userSavingGoal)));
-                        tvSaving.setText("Saving today : RM "+String.valueOf(decimalFormat.format(userSaving)));
+                        tvSavingGoal.setText("Matlamat Simpanan Harian"+"\n"+" RM "+String.valueOf(decimalFormat.format(userSavingGoal)));
+                        tvSaving.setText("Simpanan Hari ini "+"\n"+" RM "+String.valueOf(decimalFormat.format(userSaving)));
 
                     }
                 } else {

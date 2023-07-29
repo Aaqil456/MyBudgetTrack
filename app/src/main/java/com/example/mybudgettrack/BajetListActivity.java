@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -172,26 +171,41 @@ public class BajetListActivity extends AppCompatActivity {
                                                 if (document != null && document.exists()) {
                                                     User user = document.toObject(User.class);
                                                     String userName = user.getUserName();
-                                                    Double userDailyExp=user.getUserDailyExpenses();
-                                                    Double userSavingGoal=user.getUserSavingGoal();
-
+                                                    double userDailyExp=user.getUserDailyExpenses();
+                                                    double userSavingGoal=user.getUserSavingGoal();
+                                                    double overspentAmount;
                                                     if (totalMoneySpent > userDailyExp) {
                                                         //show overspend
                                                         showOverspendingNotification(totalMoneySpent, userDailyExp,dateOfSpend);
-                                                        //set background
-                                                        // Change CardView background color to RED color
-                                                        adapter.setBackgroundForDate(dateOfSpend, Color.RED);
+
+                                                        // Update the userDailyExpenditure in Firestore
+                                                        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                        DocumentReference userRef = db.collection("users").document(userId);
+                                                        userRef.update("userTotalSaving", 0)
+                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+                                                                        // Value updated successfully
+                                                                        Toast.makeText(BajetListActivity.this, "Total Saving updated in Firestore", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                })
+                                                                .addOnFailureListener(new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@io.reactivex.rxjava3.annotations.NonNull Exception e) {
+                                                                        // Value update failed
+                                                                        Toast.makeText(BajetListActivity.this, "Failed to update Total Saving : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                });
 
                                                     } else {
-                                                        // Change CardView background color to default/normal color
-                                                        adapter.setBackgroundForDate(dateOfSpend, Color.TRANSPARENT);
-                                                        double overspentAmount = userDailyExp - totalMoneySpent;
+
+                                                        overspentAmount = userDailyExp - totalMoneySpent;
                                                         savingTotal += overspentAmount;
 
                                                         // Update the userDailyExpenditure in Firestore
                                                         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                                         DocumentReference userRef = db.collection("users").document(userId);
-                                                        userRef.update("userTotalSaving", savingTotal)
+                                                        userRef.update("userTotalSaving", overspentAmount)
                                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void aVoid) {

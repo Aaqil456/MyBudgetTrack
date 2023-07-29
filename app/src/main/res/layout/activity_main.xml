@@ -179,7 +179,7 @@
                     android:id="@+id/tvtext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Daily Expense"
+                    android:text="Perbelanjaan harian"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="30sp" />
@@ -188,7 +188,7 @@
                     android:id="@+id/tvDailyExp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Weeeee"
+                    android:text=" "
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="25sp" />
@@ -198,7 +198,7 @@
                     android:id="@+id/tvSaving"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="My Saving: Saving"
+                    android:text="Simpanan Saya: "
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="25sp" />
@@ -207,7 +207,7 @@
                     android:id="@+id/tvSavingGoal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="My Saving goal: Saving"
+                    android:text="Matlamat simpanan harian: "
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="25sp" />

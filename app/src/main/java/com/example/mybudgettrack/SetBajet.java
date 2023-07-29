@@ -92,7 +92,7 @@ public class SetBajet extends AppCompatActivity {
                 // Get saving input
                 String savingString = savingInput.getText().toString();
 
-                double saving = Double.parseDouble(savingString);
+                double saving = Double.parseDouble(savingString)/calculateNumberOfDays();
 
                 // Set the dailyExpenditure in the Singleton
                 DailyExpenditureSingleton.getInstance().setDailyExpenditure(dailyExpenditure);
