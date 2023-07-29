@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.DecimalFormat;
 
@@ -67,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("overspend")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Done";
+                        if (!task.isSuccessful()) {
+                            msg = "Failed";
+                        }
+
+                    }
+                });
 
         btnSetBajet.setOnClickListener(new View.OnClickListener() {
             @Override

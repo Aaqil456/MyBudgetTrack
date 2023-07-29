@@ -32,8 +32,11 @@ android {
 }
 
 dependencies {
-
+    //graf
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+
+
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
@@ -63,6 +66,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:23.1.2'
 
     implementation 'androidx.webkit:webkit:1.4.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
 
 
     testImplementation 'junit:junit:4.13.2'

@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/login_button"
     android:layout_margin="16dp"
+    android:id="@+id/cardView"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 

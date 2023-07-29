@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,6 +55,8 @@ public class BajetListActivity extends AppCompatActivity {
     BajetAdapter adapter;
     ProgressDialog pd;
     FloatingActionButton floatingActionButton;
+    private String currentDateString;
+
 
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
@@ -150,6 +153,7 @@ public class BajetListActivity extends AppCompatActivity {
                         Date currentDate = new Date();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String currentDateString = dateFormat.format(currentDate);
+
                         // Calculate the total money spent for the same date and check for overspending
                         for (BajetModel model : modelList) {
                             String dateOfSpend = model.getTarikhBajet();
@@ -172,16 +176,22 @@ public class BajetListActivity extends AppCompatActivity {
                                                     Double userSavingGoal=user.getUserSavingGoal();
 
                                                     if (totalMoneySpent > userDailyExp) {
+                                                        //show overspend
                                                         showOverspendingNotification(totalMoneySpent, userDailyExp,dateOfSpend);
-                                                    } else {
+                                                        //set background
+                                                        // Change CardView background color to RED color
+                                                        adapter.setBackgroundForDate(dateOfSpend, Color.RED);
 
+                                                    } else {
+                                                        // Change CardView background color to default/normal color
+                                                        adapter.setBackgroundForDate(dateOfSpend, Color.TRANSPARENT);
                                                         double overspentAmount = userDailyExp - totalMoneySpent;
                                                         savingTotal += overspentAmount;
 
                                                         // Update the userDailyExpenditure in Firestore
                                                         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                                         DocumentReference userRef = db.collection("users").document(userId);
-                                                        userRef.update("userTotalSaving", overspentAmount)
+                                                        userRef.update("userTotalSaving", savingTotal)
                                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void aVoid) {

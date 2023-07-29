@@ -174,9 +174,9 @@ public class Bil extends AppCompatActivity {
 
         Map<String,Object> doc = new HashMap<>();
         doc.put("id",id);
-        doc.put("Wang perbelanjaan", wang);
-        doc.put("Tarikh perbelanjaan", tarikh);
-        doc.put("Penerangan perbelanjaan", penerangan);
+        doc.put("Wang pembayaran", wang);
+        doc.put("Tarikh bayar", tarikh);
+        doc.put("Penerangan bil", penerangan);
 
         //add this data
         db.collection("bil1").document(id).set(doc)

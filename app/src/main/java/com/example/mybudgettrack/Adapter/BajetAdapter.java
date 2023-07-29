@@ -109,4 +109,16 @@ public class BajetAdapter extends RecyclerView.Adapter<BajetViewHolder> {
     public int getItemCount() {
         return modelList.size();
     }
+
+    public void setBackgroundForDate(String date, int color) {
+        // Loop through the modelList to find the CardView with the specified date
+        for (int i = 0; i < modelList.size(); i++) {
+            if (modelList.get(i).getTarikhBajet().equals(date)) {
+                // Update the background color of the CardView
+                notifyItemChanged(i);
+                break; // No need to continue searching
+            }
+        }
+    }
+
 }

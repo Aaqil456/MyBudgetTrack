@@ -1,7 +1,10 @@
 package com.example.mybudgettrack;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -9,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,10 +27,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class BilListActivity extends AppCompatActivity {
+
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     List<BilModel> modelList = new ArrayList<>();
     RecyclerView mRecyclerView;
@@ -36,10 +47,15 @@ public class BilListActivity extends AppCompatActivity {
     BilAdapter adapter;
     ProgressDialog pd;
     FloatingActionButton floatingActionButton;
+
+    private static final String CHANNEL_ID = "PaymentChannel";
+    // Notification ID
+    private static final int NOTIFICATION_ID = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bil_list);
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Senarai Bil");
@@ -67,6 +83,7 @@ public class BilListActivity extends AppCompatActivity {
         //show data in recycler view
         showData();
 
+
     }
 
     private void showData() {
@@ -87,9 +104,9 @@ public class BilListActivity extends AppCompatActivity {
                         for(DocumentSnapshot doc: task.getResult()){
                             BilModel model = new BilModel(
                                     doc.getString("id")
-                                    ,doc.getString("Wang perbelanjaan")
-                                    ,doc.getString("Tarikh perbelanjaan")
-                                    ,doc.getString("Penerangan perbelanjaan"));
+                                    ,doc.getString("Wang pembayaran")
+                                    ,doc.getString("Tarikh bayar")
+                                    ,doc.getString("Penerangan bil"));
 
 
                             modelList.add(model);
@@ -99,6 +116,9 @@ public class BilListActivity extends AppCompatActivity {
                         adapter = new BilAdapter(BilListActivity.this,modelList);
                         //set adapter to recycler view
                         mRecyclerView.setAdapter(adapter);
+
+                        // Check for notifications
+                        checkForNotifications();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -108,6 +128,7 @@ public class BilListActivity extends AppCompatActivity {
                         Toast.makeText(BilListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 
     public void deleteData(int index){
@@ -132,6 +153,57 @@ public class BilListActivity extends AppCompatActivity {
                 });
     }
 
+
+    private void checkForNotifications() {
+        // Get the current date
+        Date currentDate = Calendar.getInstance().getTime();
+        // Format the current date to match the date format in Firestore ("yyyy-MM-dd")
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDateString = dateFormat.format(currentDate);
+
+        // Check for matching "Tarikh perbelanjaan" in the modelList
+        for (BilModel model : modelList) {
+            if (model.getTarikhBayar().equals(currentDateString)) {
+                // Show in-app notification
+                Toast.makeText(this, "Over", Toast.LENGTH_SHORT).show();
+                showBilNotification(Double.parseDouble(model.getWangBil()),model.getTarikhBayar());
+                break; // No need to continue checking once a match is found
+            }
+        }
+    }
+
+
+    private void showBilNotification(double paymentMoney, String dateOfSpend) {
+
+        String message = "You have to pay RM" + paymentMoney+" by "+dateOfSpend;
+
+        // Create a notification channel (required for newer Android versions)
+        createNotificationChannel();
+
+        // Create the notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.notification_icon)
+                .setContentTitle("Bil Payment Alert")
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        // Show the notification
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Payment Channel";
+            String description = "Channel for bil payment notifications";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
     @Override
     public void onBackPressed() {
