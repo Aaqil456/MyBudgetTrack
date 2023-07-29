@@ -1,5 +1,6 @@
 package com.example.mybudgettrack;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,11 +80,15 @@ public class Graf extends AppCompatActivity {
                         }
 
                         // Set the data to the BarChart
-                        BarDataSet dataSet = new BarDataSet(entries, "Total Money Spent");
+                        BarDataSet dataSet = new BarDataSet(entries, "Wang Dibelanja");
+                        dataSet.setColor(Color.rgb(248,200,220));
                         BarData barData = new BarData(dataSet);
 
                         BarChart barChart = findViewById(R.id.barChart);
+
                         barChart.setData(barData);
+                        // Set the label for the entire BarChart
+                        barChart.getDescription().setText("Tarikh");
 
                         // Customize x-axis labels (dates)
                         final String[] dates = totalMoneySpentByDate.keySet().toArray(new String[0]);

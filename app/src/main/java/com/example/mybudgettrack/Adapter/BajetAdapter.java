@@ -59,7 +59,7 @@ public class BajetAdapter extends RecyclerView.Adapter<BajetViewHolder> {
             //creating alert dialog
                 AlertDialog.Builder builder= new AlertDialog.Builder(listActivity);
                 //options to display in dialog
-                String[] options = {"Update","Delete"};
+                String[] options = {"Kemaskini","Buang"};
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -97,7 +97,7 @@ public class BajetAdapter extends RecyclerView.Adapter<BajetViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull BajetViewHolder holder, int position) {
         //bind view set data
-        holder.tvWang.setText(modelList.get(position).getWangBajet());
+        holder.tvWang.setText("RM"+modelList.get(position).getWangBajet());
         holder.tvTarikh.setText(modelList.get(position).getTarikhBajet());
         holder.tvPenerangan.setText(modelList.get(position).getPeneranganBajet());
 

@@ -56,7 +56,7 @@ public class BilAdapter extends RecyclerView.Adapter<BilViewHolder>{
                 //creating alert dialog
                 AlertDialog.Builder builder= new AlertDialog.Builder(listActivity);
                 //options to display in dialog
-                String[] options = {"Update","Delete"};
+                String[] options = {"Kemaskini","Sudah bayar"};
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

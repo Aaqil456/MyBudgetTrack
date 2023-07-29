@@ -184,7 +184,7 @@ public class Bil extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         pd.dismiss();
-                        Toast.makeText(Bil.this,"Uploaded",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Bil.this,"Sudah ditambah",Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

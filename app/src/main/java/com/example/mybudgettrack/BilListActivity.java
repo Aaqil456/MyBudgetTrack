@@ -140,7 +140,7 @@ public class BilListActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(BilListActivity.this, "Deleted ...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BilListActivity.this, "Sudah dibuang ...", Toast.LENGTH_SHORT).show();
                         showData();
 
                     }

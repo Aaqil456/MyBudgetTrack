@@ -29,7 +29,7 @@ public class SetBajet extends AppCompatActivity {
     private EditText budgetInput,savingInput;
     private Button calculateButton;
     private TextView resultDisplay;
-    private TextView btnSetStartDate, btnSetEndDate;
+    private TextView btnSetStartDate, btnSetEndDate,tvStartDate,tvEndDate;
     private Calendar startDate, endDate;
     private FirebaseFirestore db;
 
@@ -48,7 +48,8 @@ public class SetBajet extends AppCompatActivity {
         resultDisplay = findViewById(R.id.result_display);
         btnSetStartDate = findViewById(R.id.btnSetStartDate);
         btnSetEndDate = findViewById(R.id.btnSetEndDate);
-
+        tvStartDate = findViewById(R.id.btnSetStartDate1);
+        tvEndDate = findViewById(R.id.btnSetEndDate1);
         // Initialize FirebaseFirestore
         db = FirebaseFirestore.getInstance();
 
@@ -98,7 +99,7 @@ public class SetBajet extends AppCompatActivity {
                 DailyExpenditureSingleton.getInstance().setDailyExpenditure(dailyExpenditure);
 
                 // Display result
-                String result = "Your daily expenditure is RM" + decimalFormat.format(dailyExpenditure);
+                String result = "Perbelanjaan harian anda adalah RM" + decimalFormat.format(dailyExpenditure);
                 resultDisplay.setText(result);
 
                 // Update the userDailyExpenditure in Firestore
@@ -176,10 +177,10 @@ public class SetBajet extends AppCompatActivity {
 
                         if (isStartDate) {
                             startDate = selectedDate;
-                            btnSetStartDate.setText(formatDate(selectedDate));
+                            tvStartDate.setText(formatDate(selectedDate));
                         } else {
                             endDate = selectedDate;
-                            btnSetEndDate.setText(formatDate(selectedDate));
+                            tvEndDate.setText(formatDate(selectedDate));
                         }
                     }
                 },
