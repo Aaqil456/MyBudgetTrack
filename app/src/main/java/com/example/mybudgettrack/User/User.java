@@ -8,14 +8,23 @@ public class User {
     private double userDailyExpenses;
     private double userTotalSaving;
     private double userSavingGoal;
-
-    public User(String userID, String userEmail, String userName, double userDailyExpenses, double userTotalSaving, double userSavingGoal) {
+    private boolean isFirstTimeLogin;
+    public User(String userID, String userEmail, String userName, double userDailyExpenses, double userTotalSaving, double userSavingGoal,boolean isFirstTimeLogin) {
         this.userID = userID;
         this.userEmail = userEmail;
         this.userName = userName;
         this.userDailyExpenses = userDailyExpenses;
         this.userTotalSaving = userTotalSaving;
         this.userSavingGoal = userSavingGoal;
+        this.isFirstTimeLogin=isFirstTimeLogin;
+    }
+
+    public boolean isFirstTimeLogin() {
+        return isFirstTimeLogin;
+    }
+
+    public void setFirstTimeLogin(boolean firstTimeLogin) {
+        isFirstTimeLogin = firstTimeLogin;
     }
 
     public User() {
@@ -68,5 +77,7 @@ public class User {
     public void setUserSavingGoal(double userSavingGoal) {
         this.userSavingGoal = userSavingGoal;
     }
+
+
 }
 

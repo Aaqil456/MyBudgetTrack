@@ -4,13 +4,13 @@
     <string name="logo_description">App Logo</string>
 
     <!-- Username hint -->
-    <string name="username_hint">Enter your username</string>
+    <string name="username_hint">Sila isi nama pengguna</string>
 
     <!-- Username hint -->
-    <string name="email_hint">Enter your email</string>
+    <string name="email_hint">Sila isi emel anda</string>
 
     <!-- Password hint -->
-    <string name="password_hint">Enter your password</string>
+    <string name="password_hint">Sila isi kata laluan anda</string>
 
     <!-- Login button label -->
     <string name="login_button_label">Login</string>

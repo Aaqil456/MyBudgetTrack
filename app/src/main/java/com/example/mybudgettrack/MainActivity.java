@@ -1,10 +1,13 @@
 package com.example.mybudgettrack;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -113,7 +116,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void showPopup(String userName) {
+        // Inflate the popup layout
+        LayoutInflater inflater = getLayoutInflater();
+        View popupView = inflater.inflate(R.layout.instruction_popup_layout, null);
+        TextView tvInstruction= popupView.findViewById(R.id.tvInstruction);
 
+        // Set the instruction text to the userName
+        tvInstruction.setText("Selamat Datang, " + userName +"\n\n Pilih bahagian set bajet terlebih dahulu " +
+                "supaya sistem dapat menentukan perbelanjaan harian anda " +
+                " kemudian anda bole menambah bajet");
+
+
+
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(popupView)
+                .setPositiveButton("Baik", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Handle the "OK" button click if needed
+
+                    }
+                });
+
+        // Create and show the AlertDialog
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
+    }
 
     private void getUserData(String userId) {
         DocumentReference userRef = db.collection("users").document(userId);
@@ -124,6 +157,29 @@ public class MainActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
                         User user = document.toObject(User.class);
+                        boolean firstTimeLogin = user.isFirstTimeLogin();
+
+                        if (firstTimeLogin) {
+                            // User is logging in for the first time
+                            // Perform any actions needed for the first-time login scenario
+                            // For example, show a welcome message, guide the user through setup, etc.
+                            showPopup(user.getUserName());
+                            // Set the firstTimeLogin flag to false in Firestore
+                            user.setFirstTimeLogin(false);
+                            userRef.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        // Successfully set the firstTimeLogin flag to false in Firestore
+                                        Log.d("Firestore", "First-time login flag updated successfully.");
+                                    } else {
+                                        Log.d("Firestore", "Error updating first-time login flag: " + task.getException());
+                                    }
+                                }
+                            });
+                        }
+
+
                         String userName = user.getUserName();
                         Double userDailyExp=user.getUserDailyExpenses();
                         Double userSavingGoal=user.getUserSavingGoal();

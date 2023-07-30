@@ -108,7 +108,7 @@ public class register_user extends AppCompatActivity {
                                     String userID = firebaseUser.getUid();
 
                                     // Create a new User instance
-                                    User user = new User(userID, email, username, 0.0, 0.0, 0.0);
+                                    User user = new User(userID, email, username, 0.0, 0.0, 0.0,true);
 
                                     // Insert the user into Firestore
                                     usersCollection.document(userID).set(user)

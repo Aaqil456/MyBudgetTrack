@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -35,6 +36,8 @@ public class Bil extends AppCompatActivity {
 
     String pId,pWang,pTarikh,pPenerangan;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,9 @@ public class Bil extends AppCompatActivity {
 
         btnSimpan=findViewById(R.id.saveBtn);
         mListButton=findViewById(R.id.listBtn);
+
+        //get user id
+        mAuth = FirebaseAuth.getInstance();
 
         /*if come here after clicking update in alert dialog of BajetListactivity
          * then get data id, wang, tarikh, penerangan
@@ -147,7 +153,7 @@ public class Bil extends AppCompatActivity {
         pd.setTitle("Kemaskini data");
         pd.show();
 
-        db.collection("bil1").document(id)
+        db.collection("bil"+mAuth.getCurrentUser().getUid()).document(id)
                 .update("Wang perbelanjaan",wang
                         , "Tarikh perbelanjaan",tarikh.toLowerCase()
                         ,"Penerangan perbelanjaan",penerangan).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -179,7 +185,7 @@ public class Bil extends AppCompatActivity {
         doc.put("Penerangan bil", penerangan);
 
         //add this data
-        db.collection("bil1").document(id).set(doc)
+        db.collection("bil"+mAuth.getCurrentUser().getUid()).document(id).set(doc)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

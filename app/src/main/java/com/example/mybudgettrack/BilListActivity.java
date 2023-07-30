@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -50,6 +51,7 @@ public class BilListActivity extends AppCompatActivity {
     BilAdapter adapter;
     ProgressDialog pd;
     FloatingActionButton floatingActionButton;
+    private FirebaseAuth mAuth;
 
     private static final String CHANNEL_ID = "PaymentChannel";
     // Notification ID
@@ -59,12 +61,13 @@ public class BilListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bil_list);
 
-        showPopup();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Senarai Bil");
         //init firestore
         db = FirebaseFirestore.getInstance();
+        //get user id
+        mAuth = FirebaseAuth.getInstance();
 
 
         //initialize view
@@ -118,7 +121,7 @@ public class BilListActivity extends AppCompatActivity {
         pd.setTitle("Sedang memuat turun senarai bil....");
         pd.show();
 
-        db.collection("bil1")
+        db.collection("bil"+mAuth.getCurrentUser().getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -126,7 +129,12 @@ public class BilListActivity extends AppCompatActivity {
                         modelList.clear();
                         pd.dismiss();
 
-
+                        if (task.getResult().isEmpty()) {
+                            // The collection is empty
+                            // You can handle this condition here
+                            // For example, display a message or perform some action
+                            showPopup();
+                        }
 
                         for(DocumentSnapshot doc: task.getResult()){
                             BilModel model = new BilModel(
@@ -162,7 +170,7 @@ public class BilListActivity extends AppCompatActivity {
         //set title of progress dialog
         pd.setTitle("Membuang bil....");
         pd.show();
-        db.collection("bil1").document(modelList.get(index).getId())
+        db.collection("bil"+mAuth.getCurrentUser().getUid()).document(modelList.get(index).getId())
                 .delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

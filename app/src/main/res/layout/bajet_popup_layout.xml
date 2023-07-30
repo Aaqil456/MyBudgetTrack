@@ -6,8 +6,8 @@
     android:background="@color/login_button"
     android:layout_margin="16dp"
     android:id="@+id/cardView"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="28dp"
+    app:cardElevation="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"

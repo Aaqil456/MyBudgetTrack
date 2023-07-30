@@ -16,25 +16,8 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
     public UserViewHolder(@NonNull View itemView) {
         super(itemView);
         mView = itemView;
-        /*
-        //item click
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mClickListener.onItemClick(view, getAdapterPosition());
-            }
-        });
-        //item long click listener
-        itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                mClickListener.onItemLongClick(view, getAdapterPosition());
 
-                return false;
-            }
-        });
 
-        */
         //initialize view with model_layout.xml
         tvUserName = itemView.findViewById(R.id.tvUsername);
         tvTotalSavings = itemView.findViewById(R.id.tvTotalSavings);

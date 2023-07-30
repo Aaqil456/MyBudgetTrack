@@ -76,7 +76,7 @@ public class BajetListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bajet_list);
-        showPopup();
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Senarai Perbelanjaan");
@@ -139,7 +139,7 @@ public class BajetListActivity extends AppCompatActivity {
         pd.setTitle("Sedang memuat turun senarai perbelanjaan....");
         pd.show();
         
-        db.collection("bajet1")
+        db.collection("bajet"+mAuth.getCurrentUser().getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -147,6 +147,12 @@ public class BajetListActivity extends AppCompatActivity {
                     modelList.clear();
                     pd.dismiss();
 
+                        if (task.getResult().isEmpty()) {
+                            // The collection is empty
+                            // You can handle this condition here
+                            // For example, display a message or perform some action
+                            showPopup();
+                        }
                         // Map to store the total money spent for each date
                         Map<String, Double> totalMoneySpentByDate = new HashMap<>();
 
@@ -315,7 +321,7 @@ public class BajetListActivity extends AppCompatActivity {
         //set title of progress dialog
         pd.setTitle("Membuang data....");
         pd.show();
-        db.collection("bajet1").document(modelList.get(index).getId())
+        db.collection("bajet"+mAuth.getCurrentUser().getUid()).document(modelList.get(index).getId())
                 .delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

@@ -82,8 +82,8 @@ public class UserListActivity extends AppCompatActivity {
                                     doc.getString("userName"),
                                     doc.getDouble("userDailyExpenses") != null ? doc.getDouble("userDailyExpenses") : 0.0,
                                     doc.getDouble("userTotalSaving") != null ? doc.getDouble("userTotalSaving") : 0.0,
-                                    doc.getDouble("userSavingGoal") != null ? doc.getDouble("userSavingGoal") : 0.0
-                            );
+                                    doc.getDouble("userSavingGoal") != null ? doc.getDouble("userSavingGoal") : 0.0,
+                                    doc.getBoolean("isFirstTimeLogin"));
 
                             modelList.add(model);
                         }

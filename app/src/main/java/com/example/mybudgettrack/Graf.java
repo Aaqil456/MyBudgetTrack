@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -26,7 +27,7 @@ import io.reactivex.rxjava3.annotations.NonNull;
 
 public class Graf extends AppCompatActivity {
     private BarChart barChart;
-
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,8 @@ public class Graf extends AppCompatActivity {
 
         barChart = findViewById(R.id.barChart);
 
+        //get user id
+        mAuth = FirebaseAuth.getInstance();
         // Fetch data from Firestore
         fetchDataFromFirestore();
 
@@ -41,7 +44,7 @@ public class Graf extends AppCompatActivity {
 
     private void fetchDataFromFirestore() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("bajet1")
+        db.collection("bajet"+mAuth.getCurrentUser().getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

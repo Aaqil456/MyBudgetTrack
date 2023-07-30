@@ -16,15 +16,22 @@
         android:padding="16dp">
 
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="20dp"
+            app:srcCompat="@drawable/logo" />
 
-            <TextView
-                android:id="@+id/tvWang2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Jika anda sudah membayar bil yang terdapat di dalam senarai tekan bil itu untuk seketika dan pilih sudah bayar"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_margin="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

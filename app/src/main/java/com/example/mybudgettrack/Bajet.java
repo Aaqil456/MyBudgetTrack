@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -35,6 +36,8 @@ public class Bajet extends AppCompatActivity {
     FirebaseFirestore db;
     String pId,pWang,pTarikh,pPenerangan;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,7 @@ public class Bajet extends AppCompatActivity {
         mListButton=findViewById(R.id.listBtn);
 
 
+        mAuth = FirebaseAuth.getInstance();
 
 
 
@@ -193,7 +197,7 @@ public class Bajet extends AppCompatActivity {
         pd.setTitle("Kemaskini data");
         pd.show();
 
-        db.collection("bajet1").document(id)
+        db.collection("bajet"+mAuth.getCurrentUser().getUid()).document(id)
                 .update("Wang perbelanjaan",wang
                         , "Tarikh perbelanjaan",tarikh.toLowerCase()
                 ,"Penerangan perbelanjaan",penerangan).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -225,7 +229,7 @@ public class Bajet extends AppCompatActivity {
         doc.put("Penerangan perbelanjaan", penerangan);
 
         //add this data
-        db.collection("bajet1").document(id).set(doc)
+        db.collection("bajet"+mAuth.getCurrentUser().getUid()).document(id).set(doc)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
