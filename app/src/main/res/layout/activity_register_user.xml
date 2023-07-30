@@ -7,6 +7,14 @@
     android:background="@drawable/pink_gradient_background"
     android:padding="16dp">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
     <!-- Logo or other graphic image -->
     <ImageView
         android:id="@+id/logo"
@@ -75,4 +83,7 @@
         android:padding="16dp"
         android:text="@string/login_button_label"
         android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

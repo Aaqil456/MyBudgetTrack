@@ -173,6 +173,7 @@
                 android:id="@+id/parentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounder_corner_background"
                 android:orientation="vertical">
 
                 <TextView

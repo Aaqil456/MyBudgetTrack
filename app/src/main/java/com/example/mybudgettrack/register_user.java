@@ -139,5 +139,10 @@ public class register_user extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+
+        finish(); // Optional: If you don't want to keep the SecondActivity in the back stack
+    }
 }
 

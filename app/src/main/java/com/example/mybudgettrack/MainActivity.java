@@ -153,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
         userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
@@ -196,6 +198,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     Log.d("Firestore", "Error getting user document: " + task.getException());
+                    Intent intent = new Intent(MainActivity.this, login.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -242,6 +247,14 @@ public class MainActivity extends AppCompatActivity {
             getUserData(userId);
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Handle the back button press
+        Intent intent = new Intent(MainActivity.this, login.class);
+        startActivity(intent);
+        finish(); // Optional: If you don't want to keep the SecondActivity in the back stack
     }
 
 }

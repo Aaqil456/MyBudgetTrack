@@ -35,7 +35,7 @@
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/rounder_corner_background"
-                android:hint="  Isi bajet sepanjang tempoh"
+                android:hint="  Isi bajet untuk tempoh yang diingini"
                 android:inputType="numberDecimal"
 
                 android:minHeight="48dp"

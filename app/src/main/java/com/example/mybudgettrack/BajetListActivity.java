@@ -218,7 +218,7 @@ public class BajetListActivity extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(Void aVoid) {
                                                                         // Value updated successfully
-                                                                        Toast.makeText(BajetListActivity.this, "Total Saving updated in Firestore", Toast.LENGTH_SHORT).show();
+                                                                        //Toast.makeText(BajetListActivity.this, "Total Saving updated in Firestore", Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 })
                                                                 .addOnFailureListener(new OnFailureListener() {
@@ -242,7 +242,7 @@ public class BajetListActivity extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(Void aVoid) {
                                                                         // Value updated successfully
-                                                                        Toast.makeText(BajetListActivity.this, "Total Saving updated in Firestore", Toast.LENGTH_SHORT).show();
+                                                                        //Toast.makeText(BajetListActivity.this, "Total Saving updated in Firestore", Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 })
                                                                 .addOnFailureListener(new OnFailureListener() {
@@ -253,8 +253,6 @@ public class BajetListActivity extends AppCompatActivity {
                                                                     }
                                                                 });
 
-                                                        // Inside your activity or fragment
-                                                        Toast.makeText(getApplicationContext(), "This is a Toast message " + savingTotal, Toast.LENGTH_SHORT).show();
 
                                                     }
 
@@ -295,7 +293,7 @@ public class BajetListActivity extends AppCompatActivity {
         // Create the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.notification_icon)
-                .setContentTitle("Overspending Alert")
+                .setContentTitle("Terlebih Belanja")
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);

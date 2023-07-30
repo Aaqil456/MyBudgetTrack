@@ -1,21 +1,15 @@
 package com.example.mybudgettrack;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 public class login extends AppCompatActivity {
@@ -89,6 +83,15 @@ Button btnDaftar;
                 });
             }
         });
-            }
-        }
+
+    }
+    @Override
+    public void onBackPressed() {
+        // Handle the back button press
+        Intent intent = new Intent(login.this, register_user.class);
+        startActivity(intent);
+        finish(); // Optional: If you don't want to keep the SecondActivity in the back stack
+    }
+
+}
 
