@@ -218,14 +218,14 @@ public class BajetListActivity extends AppCompatActivity {
                                                                     @Override
                                                                     public void onSuccess(Void aVoid) {
                                                                         // Value updated successfully
-                                                                        //Toast.makeText(BajetListActivity.this, "Total Saving updated in Firestore", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(BajetListActivity.this, "Jumlah simpanan telah diubah di firestore", Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 })
                                                                 .addOnFailureListener(new OnFailureListener() {
                                                                     @Override
                                                                     public void onFailure(@io.reactivex.rxjava3.annotations.NonNull Exception e) {
                                                                         // Value update failed
-                                                                        Toast.makeText(BajetListActivity.this, "Failed to update Total Saving : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(BajetListActivity.this, "Gagal mengubah jumlah simpanan : " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 });
 
@@ -249,7 +249,7 @@ public class BajetListActivity extends AppCompatActivity {
                                                                     @Override
                                                                     public void onFailure(@io.reactivex.rxjava3.annotations.NonNull Exception e) {
                                                                         // Value update failed
-                                                                        Toast.makeText(BajetListActivity.this, "Failed to update Total Saving : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(BajetListActivity.this, "Gagal mengubah jumlah simpanan : " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 });
 
@@ -258,7 +258,7 @@ public class BajetListActivity extends AppCompatActivity {
 
                                                 }
                                             } else {
-                                                Log.d("Firestore", "Error getting user document: " + task.getException());
+                                                Log.d("Firestore", "gagal mendapat maklumat pengguna: " + task.getException());
                                             }
                                         }
                                     });
