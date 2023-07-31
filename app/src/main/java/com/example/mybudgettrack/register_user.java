@@ -62,37 +62,37 @@ public class register_user extends AppCompatActivity {
                 final String username = etUserName.getText().toString().trim();
 
                 if (email.isEmpty()) {
-                    etEmail.setError("Email is empty");
+                    etEmail.setError("Sila isi emel");
                     etEmail.requestFocus();
                     return;
                 }
 
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    etEmail.setError("Enter a valid email address");
+                    etEmail.setError("Sila isi emel yang betul");
                     etEmail.requestFocus();
                     return;
                 }
 
                 if (password.isEmpty()) {
-                    etPassword.setError("Enter the password");
+                    etPassword.setError("Sila isi kata laluan");
                     etPassword.requestFocus();
                     return;
                 }
 
                 if (password.length() < 6) {
-                    etPassword.setError("Length of the password should be at least 6");
+                    etPassword.setError("Kata laluan harus mempunyai sekurang-kurangnya 6 huruf atau nombor");
                     etPassword.requestFocus();
                     return;
                 }
 
                 if (username.isEmpty()) {
-                    etUserName.setError("Enter the password");
+                    etUserName.setError("Sila isi nama pengguna");
                     etUserName.requestFocus();
                     return;
                 }
 
-                if (username.length() < 6) {
-                    etUserName.setError("Length of the username should be at least 6");
+                if (username.length() < 3) {
+                    etUserName.setError("Nama pengguna harus mempunyai sekurang-kurangnya 3 huruf atau nombor");
                     etUserName.requestFocus();
                     return;
                 }
@@ -116,7 +116,7 @@ public class register_user extends AppCompatActivity {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     // Registration and data insertion successful
-                                                    Toast.makeText(register_user.this, "You are successfully registered", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(register_user.this, "Anda berjaya mendaftar", Toast.LENGTH_SHORT).show();
                                                     Intent intent = new Intent(register_user.this, login.class);
                                                     startActivity(intent);
                                                 }
@@ -125,12 +125,12 @@ public class register_user extends AppCompatActivity {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
                                                     // Data insertion failed
-                                                    Toast.makeText(register_user.this, "Registration failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(register_user.this, "Pendaftaran pengguna gagal: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                 } else {
                                     // Registration failed
-                                    Toast.makeText(register_user.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(register_user.this, "Pendaftaran pengguna gagal: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

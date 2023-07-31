@@ -46,25 +46,25 @@ Button btnDaftar;
 
                 if(email.isEmpty())
                 {
-                    etEmail.setError("Email is empty");
+                    etEmail.setError("Sila isi emel");
                     etEmail.requestFocus();
                     return;
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
                 {
-                    etEmail.setError("Enter the valid email");
+                    etEmail.setError("Sila isi emel yang betul");
                     etEmail.requestFocus();
                     return;
                 }
                 if(password.isEmpty())
                 {
-                    etPassword.setError("Password is empty");
+                    etPassword.setError("Sila isi kata laluan");
                     etPassword.requestFocus();
                     return;
                 }
                 if(password.length()<6)
                 {
-                    etPassword.setError("Length of password is more than 6");
+                    etPassword.setError("Kata laluan harus mempunyai sekurang-kurangnya 6 huruf atau nombor");
                     etPassword.requestFocus();
                     return;
                 }

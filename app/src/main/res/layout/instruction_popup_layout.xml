@@ -15,14 +15,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="20dp"
-            app:srcCompat="@drawable/logo" />
-
         <TextView
             android:id="@+id/tvInstruction"
             android:layout_width="match_parent"
