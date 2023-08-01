@@ -6,14 +6,16 @@ public class User {
     private String userName;
 
     private double userDailyExpenses;
+    private double userTodayExpenses;
     private double userTotalSaving;
     private double userSavingGoal;
     private boolean isFirstTimeLogin;
-    public User(String userID, String userEmail, String userName, double userDailyExpenses, double userTotalSaving, double userSavingGoal,boolean isFirstTimeLogin) {
+    public User(String userID, String userEmail, String userName, double userDailyExpenses, double userTodayExpenses, double userTotalSaving, double userSavingGoal,boolean isFirstTimeLogin) {
         this.userID = userID;
         this.userEmail = userEmail;
         this.userName = userName;
         this.userDailyExpenses = userDailyExpenses;
+        this.userTodayExpenses= userTodayExpenses;
         this.userTotalSaving = userTotalSaving;
         this.userSavingGoal = userSavingGoal;
         this.isFirstTimeLogin=isFirstTimeLogin;
@@ -25,6 +27,14 @@ public class User {
 
     public void setFirstTimeLogin(boolean firstTimeLogin) {
         isFirstTimeLogin = firstTimeLogin;
+    }
+
+    public double getUserTodayExpenses() {
+        return userTodayExpenses;
+    }
+
+    public void setUserTodayExpenses(double userTodayExpenses) {
+        this.userTodayExpenses = userTodayExpenses;
     }
 
     public User() {

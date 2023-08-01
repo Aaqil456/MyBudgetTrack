@@ -27,19 +27,42 @@
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Isi bajet untuk tempoh yang diingini"
+                android:textAlignment="center"
+                android:textColor="#3F51B5"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/edittext_budget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textview_budget_title"
-                android:layout_marginHorizontal="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="22dp"
+                android:layout_marginTop="2dp"
                 android:background="@drawable/rounder_corner_background"
-                android:hint="  Isi bajet untuk tempoh yang diingini"
+                android:hint="  Isi bajet"
                 android:inputType="numberDecimal"
-
                 android:minHeight="48dp"
                 android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:text=" Matlamat simpanan"
+                android:textColor="#3F51B5"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -47,14 +70,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/edittext_budget"
-                android:layout_marginHorizontal="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="22dp"
+                android:layout_marginTop="2dp"
                 android:background="@drawable/rounder_corner_background"
                 android:hint="  Isi matlamat simpanan"
+                android:layout_weight="1"
                 android:inputType="numberDecimal"
                 android:minHeight="48dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"

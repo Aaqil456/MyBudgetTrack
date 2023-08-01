@@ -122,7 +122,13 @@ public class SetBajet extends AppCompatActivity {
                         });
 
 
+                Intent intent = new Intent(SetBajet.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
+
+
+
         });
 
     }

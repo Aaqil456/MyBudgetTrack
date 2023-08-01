@@ -89,9 +89,29 @@ public class Bil extends AppCompatActivity {
         db =  FirebaseFirestore.getInstance();
 
         //click button to add data
+        //click button to add data
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(etWang.getText().toString().trim().isEmpty()){
+                    etWang.setError("isi bahagian wang pembayaran");
+                    etWang.requestFocus();
+                    return;
+                }
+
+                if(etTarikh.getText().toString().trim().isEmpty()){
+                    etTarikh.setError("isi tarikh akhir pembayaran");
+                    etTarikh.requestFocus();
+                    return;
+                }
+
+                if(etWang.getText().toString().trim().isEmpty()){
+                    etPenerangan.setError("penerangan bil");
+                    etPenerangan.requestFocus();
+                    return;
+                }
+
                 Bundle bundle1 = getIntent().getExtras();
                 if(bundle !=null){
                     //updating
@@ -104,6 +124,23 @@ public class Bil extends AppCompatActivity {
                     updateData(id,wang,tarikh,penerangan);
                 }
                 else{
+                    if(etWang.getText().toString().trim().isEmpty()){
+                        etWang.setError("isi bahagian wang pembayaran");
+                        etWang.requestFocus();
+                        return;
+                    }
+
+                    if(etTarikh.getText().toString().trim().isEmpty()){
+                        etTarikh.setError("isi tarikh akhir pembayaran");
+                        etTarikh.requestFocus();
+                        return;
+                    }
+
+                    if(etWang.getText().toString().trim().isEmpty()){
+                        etPenerangan.setError("penerangan bil");
+                        etPenerangan.requestFocus();
+                        return;
+                    }
                     //adding new
                     //input data
                     String wang = etWang.getText().toString().trim();
@@ -154,9 +191,9 @@ public class Bil extends AppCompatActivity {
         pd.show();
 
         db.collection("bil"+mAuth.getCurrentUser().getUid()).document(id)
-                .update("Wang perbelanjaan",wang
-                        , "Tarikh perbelanjaan",tarikh.toLowerCase()
-                        ,"Penerangan perbelanjaan",penerangan).addOnCompleteListener(new OnCompleteListener<Void>() {
+                .update("Wang pembayaran",wang
+                        , "Tarikh bayar",tarikh.toLowerCase()
+                        ,"Penerangan bil",penerangan).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         pd.dismiss();

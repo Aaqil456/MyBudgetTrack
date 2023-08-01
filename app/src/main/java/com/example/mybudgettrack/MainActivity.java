@@ -36,7 +36,7 @@ import java.text.DecimalFormat;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     RelativeLayout btnBajet,btnSetBajet,btnBil,btnGraf;
-    TextView tvDailyExp,tvSavingGoal,tvSaving;
+    TextView tvDailyExp,tvTodayExp,tvSavingGoal,tvSaving;
     private SharedPreferences preferences;
     private static final String PREFS_NAME = "MyPrefs";
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Find the TextView elements within the parent layout
         tvDailyExp = parentLayout.findViewById(R.id.tvDailyExp);
+        tvTodayExp = parentLayout.findViewById(R.id.tvTodayExp);
+
         tvSavingGoal = parentLayout.findViewById(R.id.tvSavingGoal);
         tvSaving = parentLayout.findViewById(R.id.tvSaving);
 
@@ -184,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
                         String userName = user.getUserName();
                         Double userDailyExp=user.getUserDailyExpenses();
+                        Double userTodayExp=user.getUserTodayExpenses();
                         Double userSavingGoal=user.getUserSavingGoal();
                         Double userSaving= user.getUserTotalSaving();
                         // Use the userName as needed
@@ -192,8 +195,9 @@ public class MainActivity extends AppCompatActivity {
 
                         // Use the other variable as needed
                         tvDailyExp.setText("RM "+String.valueOf(decimalFormat.format(userDailyExp)));
-                        tvSavingGoal.setText("Matlamat Simpanan Harian"+"\n"+" RM "+String.valueOf(decimalFormat.format(userSavingGoal)));
-                        tvSaving.setText("Simpanan Hari ini "+"\n"+" RM "+String.valueOf(decimalFormat.format(userSaving)));
+                        tvSavingGoal.setText("RM "+String.valueOf(decimalFormat.format(userSavingGoal)));
+                        tvSaving.setText("RM "+String.valueOf(decimalFormat.format(userSaving)));
+                        tvTodayExp.setText("RM "+String.valueOf(decimalFormat.format(userTodayExp)));
 
                     }
                 } else {

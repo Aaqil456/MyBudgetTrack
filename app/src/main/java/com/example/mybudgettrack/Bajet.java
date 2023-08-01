@@ -98,19 +98,19 @@ public class Bajet extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(etWang.getText().toString().trim().isEmpty()){
-                    etWang.setError("field is empty");
+                    etWang.setError("isi jumlah perbelanjaan");
                     etWang.requestFocus();
                     return;
                 }
 
                 if(etTarikh.getText().toString().trim().isEmpty()){
-                    etTarikh.setError("field is empty");
+                    etTarikh.setError("isi tarikh perbelanjaan");
                     etTarikh.requestFocus();
                     return;
                 }
 
                 if(etWang.getText().toString().trim().isEmpty()){
-                    etPenerangan.setError("field is empty");
+                    etPenerangan.setError("isi penerangan perbelanjaan");
                     etPenerangan.requestFocus();
                     return;
                 }
@@ -128,19 +128,19 @@ public class Bajet extends AppCompatActivity {
                 }
                 else{
                     if(etWang.getText().toString().trim().isEmpty()){
-                        etWang.setError("field is empty");
+                        etWang.setError("isi jumlah perbelanjaan");
                         etWang.requestFocus();
                         return;
                     }
 
                     if(etTarikh.getText().toString().trim().isEmpty()){
-                        etTarikh.setError("field is empty");
+                        etTarikh.setError("isi tarikh perbelanjaan");
                         etTarikh.requestFocus();
                         return;
                     }
 
                     if(etWang.getText().toString().trim().isEmpty()){
-                        etPenerangan.setError("field is empty");
+                        etPenerangan.setError("isi penerangan perbelanjaan");
                         etPenerangan.requestFocus();
                         return;
                     }

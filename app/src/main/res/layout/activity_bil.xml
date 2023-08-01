@@ -12,7 +12,7 @@
     <!-- Edit Text input wang-->
     <EditText
         android:id="@+id/etWang"
-        android:hint="masukkan bil pembayaran(RM)"
+        android:hint="masukkan jumlah pembayaran(RM)"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -23,7 +23,7 @@
     <!-- Edit Text input tarikh-->
     <TextView
         android:id="@+id/etTarikh"
-        android:hint="tekan untuk pilih tarikh"
+        android:hint="Tarikh akhir pembayaran"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"

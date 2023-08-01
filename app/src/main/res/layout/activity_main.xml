@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/OuterLayer"
@@ -173,14 +173,16 @@
                 android:id="@+id/parentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounder_corner_background"
+                android:layout_margin="10dp"
+                android:background="@drawable/edittext_background"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvtext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Perbelanjaan harian"
+                    android:layout_marginTop="5dp"
+                    android:text="Bajet harian"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="30sp" />
@@ -191,28 +193,62 @@
                     android:layout_height="wrap_content"
                     android:text=" "
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/purple_500"
                     android:textSize="25sp" />
 
+                <TextView
+                    android:id="@+id/tvtext2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Perbelanjaan hari ini"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/tvTodayExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" "
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_500"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvtext3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Simpanan Saya"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/tvSaving"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Simpanan Saya: "
-                    android:layout_margin="20dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_500"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/tvtext4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Matlamat simpanan harian"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="25sp" />
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/tvSavingGoal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="Matlamat simpanan harian: "
+                    android:layout_marginBottom="5dp"
+                    android:text=""
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/purple_500"
                     android:textSize="25sp" />
 
 

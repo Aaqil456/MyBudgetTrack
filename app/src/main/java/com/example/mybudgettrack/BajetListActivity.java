@@ -237,7 +237,7 @@ public class BajetListActivity extends AppCompatActivity {
                                                         // Update the userDailyExpenditure in Firestore
                                                         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                                         DocumentReference userRef = db.collection("users").document(userId);
-                                                        userRef.update("userTotalSaving", overspentAmount)
+                                                        userRef.update("userTotalSaving", overspentAmount,"userTodayExpenses",totalMoneySpent)
                                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void aVoid) {
