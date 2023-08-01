@@ -129,7 +129,7 @@ public class BilListActivity extends AppCompatActivity {
                         modelList.clear();
                         pd.dismiss();
 
-                        if (task.getResult().isEmpty()) {
+                        if (!task.getResult().isEmpty() && task.getResult().size() == 1) {
                             // The collection is empty
                             // You can handle this condition here
                             // For example, display a message or perform some action

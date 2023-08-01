@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tvDailyExp,tvTodayExp,tvSavingGoal,tvSaving;
     private SharedPreferences preferences;
     private static final String PREFS_NAME = "MyPrefs";
-    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    private DecimalFormat decimalFormat = new DecimalFormat("0");
+
     LinearLayout parentLayout;
     private FirebaseFirestore db;
 
@@ -90,20 +91,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,SetBajet.class));
+                finish();
             }
         });
 
         btnBajet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,BajetListActivity.class));
+                startActivity(new Intent(MainActivity.this,Bajet.class));
+                finish();
             }
         });
 
         btnBil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,BilListActivity.class));
+                startActivity(new Intent(MainActivity.this,Bil.class));
+                finish();
             }
         });
 
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, Graf.class));
-            }
+                finish();            }
         });
 
 
