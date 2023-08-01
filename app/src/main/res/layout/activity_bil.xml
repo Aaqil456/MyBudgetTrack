@@ -23,7 +23,7 @@
     <!-- Edit Text input tarikh-->
     <TextView
         android:id="@+id/etTarikh"
-        android:hint="Tarikh akhir pembayaran"
+        android:hint="Tarikh akhir pembayaran "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
